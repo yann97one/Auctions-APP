@@ -19,9 +19,9 @@ public class User implements Serializable {
     private String rue;
     private String codePostal;
     private String ville;
-    private String role;
+    private Role role;
 
-    public User(String nom, String pseudo, String prenom, String email, String password, String telephone, String rue, String codePostal, String ville, String role) {
+    public User(String nom, String pseudo, String prenom, String email, String password, String telephone, String rue, String codePostal, String ville, Role role) {
         this.nom = nom;
         this.pseudo = pseudo;
         this.prenom = prenom;
