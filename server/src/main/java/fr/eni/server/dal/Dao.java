@@ -5,7 +5,7 @@ import java.util.List;
 public interface Dao<T> {
     void create(T obj);
 
-    void delete(T obj);
+    void delete(Long id);
 
     List<T> getAll();
 
