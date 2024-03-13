@@ -3,8 +3,9 @@ import {lazy} from 'react';
 
 export const GENERAL_ROUTES: ReactRoute[] = [
     {
-        path: "/login",
-        component: lazy(() => import("../components/UserLogin")),
+        //TODO : faire la page d'acceuil et rediriger ici
+        path: "/",
+        component: lazy(() => import("../components/authentification/UserLogin")),
         roles: [],
     }
 ]
