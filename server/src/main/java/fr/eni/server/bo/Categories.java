@@ -1,27 +1,16 @@
 package fr.eni.server.bo;
 
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
 import java.io.Serializable;
 import java.util.Objects;
 
-public class Categories implements Serializable {/**
- * Numéro de sérialisation
- */
-private static final long serialVersionUID = 1L;
-    private int no_categorie;
-
+@AllArgsConstructor
+@NoArgsConstructor
+@Data
+public class Categories implements Serializable {
+    private int idCategorie;
     private String libelle;
-
-
-    public int getNo_categorie() {
-        return no_categorie;
-    }
-
-    public String getLibelle() {
-        return libelle;
-    }
-
-    public Categories(String libelle, int no_categorie) {
-        this.libelle=libelle;
-        this.no_categorie=no_categorie;
-    }
 }
