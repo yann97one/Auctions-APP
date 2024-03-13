@@ -1,8 +1,22 @@
 import {useNavigate} from "react-router-dom";
+import {axiosHelper} from "../../api/axios_helper";
+import {useEffect} from "react";
 
 function UserLogin() {
     const navigate = useNavigate();
 
+    const login = async () => {
+        try {
+            const response = axiosHelper.get("/auth/login");
+            console.log(response);
+        } catch (error) {
+            console.log(error);
+        }
+    }
+
+    useEffect(() => {
+        login();
+    })
     return (
 
         <form className="max-w-sm mx-auto">
