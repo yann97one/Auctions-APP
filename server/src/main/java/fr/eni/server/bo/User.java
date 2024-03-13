@@ -9,28 +9,28 @@ import java.io.Serializable;
 @NoArgsConstructor
 @Data
 public class User implements Serializable {
-    private long id;
-    private String nom;
-    private String pseudo;
-    private String prenom;
+    private String id;
+    private String name;
+    private String username;
+    private String lastname;
     private String email;
     private String password;
-    private String telephone;
-    private String rue;
-    private String codePostal;
-    private String ville;
+    private String phone;
+    private String street;
+    private String zip;
+    private String town;
     private Role role;
 
-    public User(String nom, String pseudo, String prenom, String email, String password, String telephone, String rue, String codePostal, String ville, Role role) {
-        this.nom = nom;
-        this.pseudo = pseudo;
-        this.prenom = prenom;
+    public User(String name, String username, String lastname, String email, String password, String phone, String street, String zip, String town, Role role) {
+        this.name = name;
+        this.username = username;
+        this.lastname = lastname;
         this.email = email;
         this.password = password;
-        this.telephone = telephone;
-        this.rue = rue;
-        this.codePostal = codePostal;
-        this.ville = ville;
+        this.phone = phone;
+        this.street = street;
+        this.zip = zip;
+        this.town = town;
         this.role = role;
     }
 
