@@ -17,11 +17,7 @@ function NavBar(props: Props) {
     const menuItems: NavBarItem[] = [
         {
             href: '/login',
-            itemLabel: 'Se connecter',
-        },
-        {
-            href: '/register',
-            itemLabel: 'S \' inscrire',
+            itemLabel: 'Se connecter/S\'inscrire',
         }
     ]
 
@@ -32,7 +28,7 @@ function NavBar(props: Props) {
     }, [extraItems]);
 
     return (
-        <nav className="bg-white border border-amber-100 dark:bg-gray-900 mb-24">
+        <nav className="bg-white border border-amber-100 dark:bg-gray-900 mb-16">
             <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
                 <a href="/" className="text-lg font-semibold text-gray-900 dark:text-white">
                     <img src={logo} alt="ENI" className="w-100 h-100"/>
