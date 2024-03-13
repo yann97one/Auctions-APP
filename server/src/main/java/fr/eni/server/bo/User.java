@@ -1,38 +1,39 @@
 package fr.eni.server.bo;
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.io.Serializable;
 
-@AllArgsConstructor
 @NoArgsConstructor
+@AllArgsConstructor
 @Data
 public class User implements Serializable {
     private long id;
-    private String nom;
+    private String name;
     private String pseudo;
-    private String prenom;
+    private String firstname;
     private String email;
     private String password;
-    private String telephone;
-    private String rue;
-    private String codePostal;
-    private String ville;
+    private String phone;
+    private String road;
+    private String zip;
+    private String city;
     private Role role;
+    private int credit;
 
-    public User(String nom, String pseudo, String prenom, String email, String password, String telephone, String rue, String codePostal, String ville, Role role) {
-        this.nom = nom;
+    public User(String name, String pseudo, String firstname, String email, String password, String phone, String road, String zip, String city, Role role, int credit) {
+        this.name = name;
         this.pseudo = pseudo;
-        this.prenom = prenom;
+        this.firstname = firstname;
         this.email = email;
         this.password = password;
-        this.telephone = telephone;
-        this.rue = rue;
-        this.codePostal = codePostal;
-        this.ville = ville;
+        this.phone = phone;
+        this.road = road;
+        this.zip = zip;
+        this.city = city;
         this.role = role;
+        this.credit = credit;
     }
-
-
 }
