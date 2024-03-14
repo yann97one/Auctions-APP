@@ -3,6 +3,7 @@ import {AUCTIONS_ROUTES} from "./AuctionsRoutes";
 import {ADMIN_ROUTES} from "./AdminRoutes";
 import {AUTH_ROUTES} from "./UnprotectedRoutes";
 import {BrowserRouter, Route, Routes} from "react-router-dom";
+import NotFound from "../components/shared/NotFound";
 
 
 function AppRoutes() {
@@ -27,6 +28,7 @@ function AppRoutes() {
                         />
                     )
                 })}
+                <Route path='*' element={<NotFound />} />
             </Routes>
         </BrowserRouter>
 
