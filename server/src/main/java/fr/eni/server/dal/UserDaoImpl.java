@@ -10,13 +10,15 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Repository
-public class UserDaoImpl implements UserDao<User> {
+public class UserDaoImpl implements UserDao {
 
     public final String INSERT = "INSERT INTO Users(firstname,lastname,email,pseudo,phone,road,zip,city,user_password,credit,role) VALUES "
             + " (:firstname, :lastname, :email, :pseudo,:phone,:road,:zip,:city,:user_password,:credit,:role)";
     private final String FIND_ALL = "SELECT * FROM Users";
 
     private final String FIND_BY_ID = "SELECT * FROM Users where id_user=:id_user";
+
+    private final String FIND_BY_LOGIN = "SELECT * FROM Users where pseudo=:pseudo or email=:email and password=:password";
     private final String DELETE = "DELETE FROM Users where id_user= :id_user;";
     private NamedParameterJdbcTemplate jdbcTemplate;
 
@@ -41,6 +43,7 @@ public class UserDaoImpl implements UserDao<User> {
         jdbcTemplate.update(INSERT, namedParameters);
     }
 
+
     @Override
     public void delete(Long userId) {
         MapSqlParameterSource namedParameters = new MapSqlParameterSource();
@@ -59,5 +62,14 @@ public class UserDaoImpl implements UserDao<User> {
         namedParameters.addValue("id_user", userId);
         List<User> users = jdbcTemplate.query(FIND_BY_ID, namedParameters, new UserRowMapper());
         return users.get(0);
+    }
+
+    @Override
+    public User findByLogin(String email, String password) {
+        MapSqlParameterSource namedParameters = new MapSqlParameterSource();
+        namedParameters.addValue("email", email);
+        namedParameters.addValue("password", password);
+        return jdbcTemplate.queryForObject(FIND_BY_LOGIN, namedParameters, new UserRowMapper());
+
     }
 }
