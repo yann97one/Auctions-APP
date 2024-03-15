@@ -62,12 +62,28 @@ function AuctionCreation() {
                         id="file_input"
                         type="file"
                     />
+
+
+                    <label htmlFor="file-input" className="sr-only">
+                        Choose file
+                    </label>
+                    <input
+                        type="file"
+                        name="file-input"
+                        id="file-input"
+                        className="block max-w-sm w-full border border-gray-200 shadow-sm rounded-lg text-sm focus:z-10 focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-slate-900 dark:border-gray-700 dark:text-gray-400 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600
+    file:bg-gray-50 file:border-0
+    file:me-4
+    file:py-3 file:px-4
+    dark:file:bg-gray-700 dark:file:text-gray-400"
+                    />
                     <p
                         className="mt-1 text-sm mb-2 text-gray-500 dark:text-gray-300"
                         id="file_input_help"
                     >
                         SVG, PNG, JPG or GIF (MAX. 800x400px).
                     </p>
+
 
                     <label htmlFor="MaP"
                            className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
@@ -81,16 +97,6 @@ function AuctionCreation() {
                                className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
                             Début de l'enchère :</label>
                         <div className="absolute my-2 inset-y-0 start-0 flex items-center ps-3 pointer-events-none">
-                            <svg
-                                className="w-4 h-4 text-gray-500 dark:text-gray-400"
-                                aria-hidden="true"
-                                xmlns="http://www.w3.org/2000/svg"
-                                fill="currentColor"
-                                viewBox="0 0 20 20"
-                            >
-                                <path
-                                    d="M20 4a2 2 0 0 0-2-2h-2V1a1 1 0 0 0-2 0v1h-3V1a1 1 0 0 0-2 0v1H6V1a1 1 0 0 0-2 0v1H2a2 2 0 0 0-2 2v2h20V4ZM0 18a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V8H0v10Zm5-8h10a1 1 0 0 1 0 2H5a1 1 0 0 1 0-2Z"/>
-                            </svg>
                         </div>
                         <Datepicker/>
                     </div>
@@ -100,16 +106,7 @@ function AuctionCreation() {
                                className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
                             Fin de l'enchère :</label>
                         <div className="absolute my-2 inset-y-0 start-0 flex items-center ps-3 pointer-events-none">
-                            <svg
-                                className="w-4 h-4 text-gray-500 dark:text-gray-400"
-                                aria-hidden="true"
-                                xmlns="http://www.w3.org/2000/svg"
-                                fill="currentColor"
-                                viewBox="0 0 20 20"
-                            >
-                                <path
-                                    d="M20 4a2 2 0 0 0-2-2h-2V1a1 1 0 0 0-2 0v1h-3V1a1 1 0 0 0-2 0v1H6V1a1 1 0 0 0-2 0v1H2a2 2 0 0 0-2 2v2h20V4ZM0 18a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V8H0v10Zm5-8h10a1 1 0 0 1 0 2H5a1 1 0 0 1 0-2Z"/>
-                            </svg>
+
                         </div>
                         <Datepicker/>
                     </div>
