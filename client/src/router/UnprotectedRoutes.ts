@@ -12,9 +12,4 @@ export const AUTH_ROUTES: ReactRoute[] = [
         component: lazy(() => import("../components/authentification/UserRegister")),
         roles: [],
     },
-    {
-        path: "/aaa",
-        component: lazy(() => import("../components/Auctions/AuctionCreation")),
-        roles: [],
-    },
 ]
