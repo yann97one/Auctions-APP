@@ -7,6 +7,8 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import fr.eni.server.bo.User;
+import org.springframework.transaction.annotation.Transactional;
+
 import java.util.List;
 
 @SpringBootTest
@@ -15,6 +17,7 @@ class UserDaoTest {
     UserDAO dao;
 
     @Test
+    @Transactional
     void contextLoads() {
         Role role= Role.ADMINISTRATEUR;
         Role role2= Role.UTILISATEUR;
