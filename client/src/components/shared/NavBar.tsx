@@ -7,24 +7,27 @@ interface Props {
 
 function NavBar(props: Props) {
     const {extraItems} = props;
-
     const [isMenuOpen, setIsMenuOpen] = useState(false);
 
     const toggleMenu = () => {
         setIsMenuOpen(!isMenuOpen);
     };
 
+
     const menuItems: NavBarItem[] = [
         {
             href: '/login',
             itemLabel: 'Se connecter/S\'inscrire',
-        }
+        },
+
     ]
 
     useEffect(() => {
         if (extraItems) {
             menuItems.push(...extraItems);
         }
+        console.log(menuItems)
+
     }, [extraItems]);
 
     return (

@@ -13,7 +13,7 @@ export const AUTH_ROUTES: ReactRoute[] = [
         roles: [],
     },
     {
-        path: "/bbb",
+        path: "/profile{:id}",
         component: lazy(() => import("../components/Profile/ViewProfile")),
         roles: [],
     },

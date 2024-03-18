@@ -1,26 +1,36 @@
 import {create} from "zustand";
-import {UserCredentials} from "./types.ts";
+import {UserCredentials} from "./types";
 
 interface State {
-    email: string;
-    userRole: string;
-    userId: string;
+    user: UserCredentials;
     setUser: (newUser: UserCredentials) => void;
     clearUser: () => void;
+    getUser: () => UserCredentials;
+    getUserRole: () => string;
 }
 
 const initialState: State = {
-    email: "",
-    userRole: "",
-    userId: "",
+    user: {
+        email: "",
+        userRole: "",
+        pseudo: "",
+        firstName: "",
+        token: ""
+    },
+    getUserRole: () => initialState.user.userRole,
     setUser: () => {
     },
     clearUser: () => {
     },
+    getUser: () => initialState.user
 };
 
-export const useUserStore = create<State>((set) => ({
+const useUserStore = create<State>((set) => ({
     ...initialState,
-    setUser: (newUser) => set({...newUser}), // Mettre à jour l'état avec les nouvelles valeurs
+    setUser: (newUser) => set((state) => ({...state, user: newUser})),
     clearUser: () => set(initialState),
+    getUser: () => initialState.user,
+    getUserRole: () => initialState.user.userRole
 }));
+
+export default useUserStore;

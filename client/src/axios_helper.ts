@@ -12,5 +12,5 @@ export const request = (method: string, url: string, data: any): Promise<any> =>
         // headers: {
         //     "Authorization": "Bearer " + window.localStorage.getItem("auth_token")
         // }
-    })
+    }).then(response => response.data)
 }
