@@ -37,7 +37,7 @@ public class UserAuthProvider {
         Date now = new Date();
         Date validity = new Date(now.getTime() + 3600000);
         Algorithm algorithm = Algorithm.HMAC256(secretKey);
-
+        System.out.println(user);
         return JWT.create()
                 .withSubject(user.getEmail())
                 .withIssuedAt(now)

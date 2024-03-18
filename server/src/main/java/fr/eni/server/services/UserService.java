@@ -1,8 +1,10 @@
 package fr.eni.server.services;
 
+import fr.eni.server.bo.Role;
 import fr.eni.server.bo.User;
 import fr.eni.server.dal.UserDaoImpl;
 import fr.eni.server.dto.CredentialsDTO;
+import fr.eni.server.dto.SignUpDto;
 import fr.eni.server.dto.UserDto;
 import fr.eni.server.exceptions.AppException;
 import fr.eni.server.mapper.UserMapper;
@@ -46,25 +48,29 @@ public class UserService implements IUserService {
 //    }
 
     @Override
-    public void register(User user) {
-        Optional<User> userOptional = Optional.ofNullable(userDao.findByLogin(user.getEmail(), user.getPseudo()));
-
-        if (userOptional.isPresent()) {
-            throw new AppException("User already exist", HttpStatus.BAD_REQUEST);
-        }
-
-        user.setPassword(passwordEncoder.encode(user.getPassword()));
+    public UserDto register(SignUpDto userDto) {
+//        Optional<User> userOptional = Optional.ofNullable(userDao.findByLogin(userDto.email(), userDto.pseudo()));
+//
+//        if (userOptional.isPresent()) {
+//            throw new AppException("User already exist", HttpStatus.BAD_REQUEST);
+//        }
+        User user = userMapper.signUpToUser(userDto);
+        user.setPassword(passwordEncoder.encode(userDto.password()));
+        user.setRole(Role.USER);
         userDao.create(user);
+        return userMapper.toUserDto(user);
     }
+
 
     @Override
     public UserDto login(CredentialsDTO credentialsDTO) {
         User user = this.userDao.findByLogin(credentialsDTO.getEmail(), credentialsDTO.getPassword());
+        System.out.println(user);
 
         if (passwordEncoder.matches(credentialsDTO.getPassword(), user.getPassword())) {
             return userMapper.toUserDto(user);
         }
-        
+
         throw new AppException("Password not correct", HttpStatus.BAD_REQUEST);
     }
 }

@@ -11,28 +11,28 @@ import java.io.Serializable;
 @Data
 public class User implements Serializable {
     private long id;
-    private String name;
+    private String lastName;
     private String pseudo;
-    private String firstname;
+    private String firstName;
     private String email;
     private String password;
-    private String phone;
+    private String phoneNumber;
     private String road;
-    private String zip;
+    private String zipCode;
     private String city;
     private Role role;
     private int credit;
 
 
-    public User(String name, String pseudo, String firstname, String email, String password, String phone, String road, String zip, String city, Role role, int credit) {
-        this.name = name;
+    public User(String lastName, String pseudo, String firstName, String email, String password, String phoneNumber, String road, String zipCode, String city, Role role, int credit) {
+        this.lastName = lastName;
         this.pseudo = pseudo;
-        this.firstname = firstname;
+        this.firstName = firstName;
         this.email = email;
         this.password = password;
-        this.phone = phone;
+        this.phoneNumber = phoneNumber;
         this.road = road;
-        this.zip = zip;
+        this.zipCode = zipCode;
         this.city = city;
         this.role = role;
         this.credit = credit;
