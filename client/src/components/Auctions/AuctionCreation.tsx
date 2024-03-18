@@ -6,13 +6,9 @@ function AuctionCreation() {
 
     return (
         <div className="flex flex-row">
-            <div className="flex flex-col  w-1/3">
-
-
+            <div className="flex flex-col w-1/3">
             </div>
-
-
-            <div className="flex flex-col w-2/3">
+            <div className="flex flex-col w-96">
                 <form>
                     <label htmlFor="Article"
                            className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
@@ -30,7 +26,6 @@ function AuctionCreation() {
                         id="message"
                         rows={4}
                         className="block max-w-sm my-2 p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                        placeholder="Write your thoughts here..."
                         defaultValue={""}
                     />
                     <label
@@ -56,13 +51,6 @@ function AuctionCreation() {
                     >
                         Photo de l'article :
                     </label>
-                    <input
-                        className="block w-full max-w-sm text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400"
-                        aria-describedby="file_input_help"
-                        id="file_input"
-                        type="file"
-                    />
-
 
                     <label htmlFor="file-input" className="sr-only">
                         Choose file
@@ -72,7 +60,7 @@ function AuctionCreation() {
                         name="file-input"
                         id="file-input"
                         className="block max-w-sm w-full border border-gray-200 shadow-sm rounded-lg text-sm focus:z-10 focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-slate-900 dark:border-gray-700 dark:text-gray-400 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600
-    file:bg-gray-50 file:border-0
+    file:bg-gray-50 file:border-0 file:hover:bg-gray-100
     file:me-4
     file:py-3 file:px-4
     dark:file:bg-gray-700 dark:file:text-gray-400"
@@ -94,7 +82,7 @@ function AuctionCreation() {
 
                     <div className="relative max-w-xs">
                         <label htmlFor="StartAuction"
-                               className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                               className="block my-2 text-sm font-medium text-gray-900 dark:text-white">
                             Début de l'enchère :</label>
                         <div className="absolute my-2 inset-y-0 start-0 flex items-center ps-3 pointer-events-none">
                         </div>
@@ -103,7 +91,7 @@ function AuctionCreation() {
 
                     <div className="relative max-w-xs">
                         <label htmlFor="EndAuction"
-                               className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                               className="block my-2 text-sm font-medium text-gray-900 dark:text-white">
                             Fin de l'enchère :</label>
                         <div className="absolute my-2 inset-y-0 start-0 flex items-center ps-3 pointer-events-none">
 
@@ -113,10 +101,10 @@ function AuctionCreation() {
 
                     <br></br>
 
-                    <div className="flex flex-col justify-center py-8 lg:py-0">
+                    <div className="flex flex-col justify-center py-2 lg:py-0">
                         <div
                             className="w-full bg-white rounded-lg shadow dark:border md:mt-0 sm:max-w-md xl:p-0 dark:bg-gray-800 dark:border-gray-700">
-                            <div className="p-6 space-y-4 md:space-y-6 sm:p-8">
+                            <div className="p-2 space-y-4 md:space-y-2 sm:p-5">
                                 <h6 className="text-xl font-medium text-gray-900 dark:text-white">Retrait</h6>
                                 <label htmlFor="Rue"
                                        className="block text-sm font-medium text-gray-900 dark:text-white">
@@ -159,8 +147,6 @@ function AuctionCreation() {
                             </button>
                         </div>
                     </div>
-
-
                 </form>
             </div>
         </div>

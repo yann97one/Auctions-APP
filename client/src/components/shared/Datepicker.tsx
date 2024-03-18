@@ -65,7 +65,7 @@ function DatePicker() {
             <Datepicker options={options} onChange={handleChange} show={show} setShow={handleClose}>
                 <input type="text"
                        className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full ps-10 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                       placeholder="Select Date" value={selectedDate} onFocus={() => setShow(true)} readOnly/>
+                       placeholder="Choisir une date" value={selectedDate} onFocus={() => setShow(true)} readOnly/>
             </Datepicker>
         </div>
     )
