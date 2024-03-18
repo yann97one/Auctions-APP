@@ -21,13 +21,13 @@ public class AuthController {
     private final UserAuthProvider userAuthProvider;
 
     @PostMapping("/login")
-    public ResponseEntity<UserDto> login(@RequestBody CredentialsDTO credentialsDto) {
+    public ResponseEntity<String> login(@RequestBody CredentialsDTO credentialsDto) {
         System.out.println(credentialsDto);
         UserDto userDto = userService.login(credentialsDto);
 
         userDto.setToken(userAuthProvider.createToken(userDto));
         System.out.println(userDto);
-        return ResponseEntity.ok(userDto);
+        return ResponseEntity.ok(userDto.getToken());
     }
 
     @PostMapping("/register")

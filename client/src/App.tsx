@@ -1,10 +1,10 @@
 import {Suspense, useEffect} from "react";
 import AppRoutes from "./router/AppRoutes";
 import NavBar from "./components/shared/NavBar";
-import useUserStore from "./store/userStore";
+import {useAppSelector} from "./store/hooks";
 
 function App() {
-    const currentUser = useUserStore.getState().user;
+    const currentUser = useAppSelector(state => state.user);
     const extraMenuItems: NavBarItem[] = []
 
     useEffect(() => {

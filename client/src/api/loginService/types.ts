@@ -1,3 +1,5 @@
+import {Role} from "../../router/types";
+
 interface LoginCredentials {
     email: string;
     password: string;
@@ -15,8 +17,17 @@ interface RegisterCredentials extends LoginCredentials {
     pseudo: string;
 }
 
+interface JwtPayload {
+    id: string;
+    email: string;
+    pseudo: string;
+    role: Role;
+    tenant: string;
+}
+
+
 interface User extends RegisterCredentials {
     id: string;
 }
 
-export type {LoginCredentials, RegisterCredentials, User}
+export type {LoginCredentials, RegisterCredentials, User, JwtPayload}

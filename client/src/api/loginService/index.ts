@@ -3,7 +3,7 @@ import {request} from "../../axios_helper";
 import {UserCredentials} from "../../store/types";
 
 export default {
-    registerUser(credentials: RegisterCredentials): Promise<String> {
+    registerUser(credentials: RegisterCredentials): Promise<UserCredentials> {
         return request("post", "/auth/register", credentials)
     },
 
