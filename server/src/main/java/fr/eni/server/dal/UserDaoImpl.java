@@ -2,7 +2,6 @@ package fr.eni.server.dal;
 
 import fr.eni.server.bo.User;
 import fr.eni.server.dal.rowMapper.UserRowMapper;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;

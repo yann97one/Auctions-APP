@@ -1,18 +1,11 @@
 package fr.eni.server.dal;
 
 import fr.eni.server.bo.Auctions;
-import fr.eni.server.bo.Selled;
 import fr.eni.server.dal.rowMapper.AuctionsRowMapper;
-import fr.eni.server.dal.rowMapper.SelledRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.stereotype.Repository;
-
-import java.sql.Timestamp;
-import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.util.Date;
 import java.util.List;
 
 @Repository

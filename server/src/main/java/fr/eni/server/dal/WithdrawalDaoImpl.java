@@ -1,16 +1,11 @@
 package fr.eni.server.dal;
 
-import fr.eni.server.bo.Auctions;
-import fr.eni.server.bo.User;
 import fr.eni.server.bo.Withdrawal;
-import fr.eni.server.dal.rowMapper.AuctionsRowMapper;
-import fr.eni.server.dal.rowMapper.UserRowMapper;
 import fr.eni.server.dal.rowMapper.WithdrawalRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.stereotype.Repository;
-
 import java.util.List;
 
 @Repository
@@ -58,6 +53,4 @@ public class WithdrawalDaoImpl implements WithdrawalDAO {
         List<Withdrawal> withdrawal= jdbcTemplate.query(FIND_BY_ID, namedParameters, new WithdrawalRowMapper());
         return withdrawal.get(0);
     }
-
-
 }

@@ -1,7 +1,5 @@
 package fr.eni.server.bo;
 import lombok.*;
-
-import java.sql.Timestamp;
 import java.time.LocalDate;
 
 @AllArgsConstructor

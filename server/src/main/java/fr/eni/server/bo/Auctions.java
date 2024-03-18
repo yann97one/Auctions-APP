@@ -1,8 +1,6 @@
 package fr.eni.server.bo;
 import lombok.*;
-
 import java.time.LocalDate;
-import java.util.Date;
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
