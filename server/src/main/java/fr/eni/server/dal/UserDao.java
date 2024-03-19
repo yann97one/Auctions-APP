@@ -1,15 +1,10 @@
 package fr.eni.server.dal;
 
-import java.util.List;
+import fr.eni.server.bo.User;
+import fr.eni.server.dto.UserDto;
 
-public interface UserDao<T> {
-    void create(T obj);
+public interface UserDao extends Dao<User> {
+    User findByLogin(String email, String password);
 
-    void delete(Long id);
-
-    List<T> getAll();
-
-    T getById(long userId);
-
-
+    User findByEmail(String email);
 }

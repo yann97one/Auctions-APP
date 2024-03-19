@@ -12,4 +12,14 @@ export const AUTH_ROUTES: ReactRoute[] = [
         component: lazy(() => import("../components/authentification/UserRegister")),
         roles: [],
     },
+    {
+        path: "/profile/:id",
+        component: lazy(() => import("../components/Profile/ViewProfile")),
+        roles: [],
+    },
+    {
+        path: "/logout",
+        component: lazy(() => import("../components/authentification/UserLogin")),
+        roles: [],
+    },
 ]

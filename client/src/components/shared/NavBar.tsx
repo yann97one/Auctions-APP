@@ -1,5 +1,7 @@
 import {useEffect, useState} from 'react';
 import logo from '../../assets/eni-logo.png';
+import {JwtPayload} from "../../api/loginService/types";
+import {getTokenFromStorage, getTokenPayload} from "../../services/localStorage";
 
 interface Props {
     extraItems?: NavBarItem[];
@@ -7,25 +9,54 @@ interface Props {
 
 function NavBar(props: Props) {
     const {extraItems} = props;
-
     const [isMenuOpen, setIsMenuOpen] = useState(false);
+    const [token, setToken] = useState<JwtPayload | undefined>(undefined);
+
 
     const toggleMenu = () => {
         setIsMenuOpen(!isMenuOpen);
     };
 
-    const menuItems: NavBarItem[] = [
+
+    const authenticatedMenuItems: NavBarItem[] = [
+        {
+            href: `profile/${token?.id}`,
+            itemLabel: 'Mon profil',
+        },
+        {
+            href: '/logout',
+            itemLabel: 'Se déconnecter',
+        }
+    ]
+
+    const unauthenticatedMenuItems: NavBarItem[] = [
         {
             href: '/login',
             itemLabel: 'Se connecter/S\'inscrire',
-        }
+        },
     ]
+
+    const menuItems: NavBarItem[] = []
+
+    if (token != undefined) menuItems.push(...authenticatedMenuItems);
+    else menuItems.push(...unauthenticatedMenuItems);
+    const manageToken = () => {
+        const storage = getTokenFromStorage();
+
+        if (storage) {
+            const tokenPayload = getTokenPayload(storage);
+            setToken(tokenPayload);
+        }
+
+    }
 
     useEffect(() => {
         if (extraItems) {
             menuItems.push(...extraItems);
         }
-    }, [extraItems]);
+
+        manageToken();
+    }, [extraItems, token]);
 
     return (
         <nav className="bg-white border border-amber-100 dark:bg-gray-900 mb-16">
@@ -52,6 +83,8 @@ function NavBar(props: Props) {
                                    className="'block py-2 px-3 text-white bg-blue-700 rounded md:bg-transparent md:text-blue-700 md:p-0 dark:text-white md:dark:text-blue-500'">{item.itemLabel}</a>
                             </li>
                         ))}
+
+                        {/*<Link to={`/profile/${user?.id}`}>Mon Profil</Link>*/}
                     </ul>
                 </div>
             </div>
