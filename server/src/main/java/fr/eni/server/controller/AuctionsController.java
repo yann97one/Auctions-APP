@@ -1,11 +1,8 @@
 package fr.eni.server.controller;
-
-import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.core.JsonProcessingException;
 import fr.eni.server.bo.Auctions;
-import fr.eni.server.bo.User;
 import fr.eni.server.service.AuctionsService;
-import fr.eni.server.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -25,10 +22,16 @@ public class AuctionsController {
     }
 
     @GetMapping()
-    public ResponseEntity<List<Auctions>> listAllAuctions() throws JsonProcessingException {
-        List<Auctions> autionsData = auctionsService.listAllAuctions();
-        String test = "test";
-        return ResponseEntity.ok(autionsData);
+    public ResponseEntity<String> listAllAuctions() throws JsonProcessingException {
+        List<Auctions> autionsData= auctionsService.listAllAuctions();
+        ObjectMapper objectMapper = new ObjectMapper();
+
+// Convertissez votre liste en JSON
+        String jsonData = objectMapper.writeValueAsString(autionsData);
+
+// Retournez la réponse JSON
+        return ResponseEntity.ok(jsonData);
+
     }
 }
 

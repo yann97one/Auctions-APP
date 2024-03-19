@@ -14,9 +14,9 @@ public class AuctionsDaoImpl implements AuctionsDAO {
 
     public final String INSERT = "INSERT INTO Auctions(auctions_amount,auctions_date,id_article,id_user) VALUES "
             + " (:amount, :date, :id_article, :id_user)";
-    private final String FIND_ALL = "SELECT * FROM Auctions ";
+    private final String FIND_ALL = "SELECT id_auctions,auctions_date,auctions_amount,id_article,Users.id_user,Users.pseudo FROM Auctions INNER JOIN Users ON Users.id_user=Auctions.id_user";
 
-    private final String FIND_BY_ID = "SELECT * FROM Auctions where id_auctions=:id_auctions";
+    private final String FIND_BY_ID = "SELECT id_auctions,auctions_date,auctions_amount,id_article,Users.id_user,Users.pseudo FROM Auctions INNER JOIN Users ON Users.id_user=Auctions.id_user where id_auctions=:id_auctions";
     private final String DELETE = "DELETE FROM Auctions where id_auctions= :id_auctions;";
 
    private NamedParameterJdbcTemplate jdbcTemplate;
@@ -43,7 +43,10 @@ public class AuctionsDaoImpl implements AuctionsDAO {
 
     @Override
     public List<Auctions> getAll() {
+
         return jdbcTemplate.query(FIND_ALL, new AuctionsRowMapper());
+
+
     }
 
     @Override
@@ -53,8 +56,4 @@ public class AuctionsDaoImpl implements AuctionsDAO {
         List<Auctions> auctions= jdbcTemplate.query(FIND_BY_ID, namedParameters, new AuctionsRowMapper());
         return auctions.get(0);
     }
-
-
-
-
 }
