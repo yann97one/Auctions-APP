@@ -13,7 +13,8 @@ public class AuctionsRowMapper implements RowMapper<Auctions> {
         Auctions auctions = new Auctions();
         auctions.setId(rs.getLong("id_auctions"));
         auctions.setAmount(rs.getInt("auctions_amount"));
-        auctions.setDate(rs.getDate("auctions_date").toLocalDate());
+        java.sql.Date sqlDate = rs.getDate("auctions_date");
+        auctions.setDate(sqlDate.toLocalDate());
         auctions.setId_article(rs.getInt("id_article"));
         auctions.setId_user(rs.getInt("id_user"));
         return auctions;

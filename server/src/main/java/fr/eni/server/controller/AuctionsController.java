@@ -25,14 +25,11 @@ public class AuctionsController {
     }
 
     @GetMapping()
-    public ResponseEntity<String> listAllAuctions() throws JsonProcessingException {
+    public ResponseEntity<List<Auctions>> listAllAuctions() throws JsonProcessingException {
         List<Auctions> autionsData = auctionsService.listAllAuctions();
-        ObjectMapper objectMapper = new ObjectMapper();
-        String json = objectMapper.writeValueAsString(autionsData);
-        System.out.println(json);
-        return ResponseEntity.ok(json);
+        String test = "test";
+        return ResponseEntity.ok(autionsData);
     }
-
 }
 
 
