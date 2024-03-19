@@ -9,11 +9,10 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import com.fasterxml.jackson.databind.ObjectMapper;
-
 import java.util.List;
 
 @Controller
-@RequestMapping("/Users")
+@RequestMapping("/users")
 public class UserController {
 
     private final UserService userService;
@@ -32,7 +31,7 @@ public class UserController {
 
         return ResponseEntity.ok(json);
     }
-    @RequestMapping("/Create")
+    @RequestMapping("/create")
     @PostMapping()
     public ResponseEntity<String> createNewUser(@RequestBody String json) {
         ObjectMapper objectMapper = new ObjectMapper();
@@ -52,17 +51,36 @@ public class UserController {
     }
     @DeleteMapping("/{id}")
     public ResponseEntity<String> DeleteUser(@PathVariable("id") Long id) {
-        userService.DeleteUser(id);
-        String response =  "test";
-        return ResponseEntity.ok(response);
+        try {
+            userService.DeleteUser(id);
+            String response = "Delete user ok";
+            return ResponseEntity.ok(response);
+        }catch (Exception e) {
+        return ResponseEntity.badRequest().body("Invalid JSON format");
+    }
     }
     @GetMapping("/{id}")
-    public ResponseEntity<String> getUserById(@PathVariable("id") Long id) throws JsonProcessingException {
-        User userData =  userService.FindByIdUser(id);
+    public ResponseEntity<String> getUserById(@PathVariable("id") Long id) throws Exception {
+        try {
+            User userData =  userService.FindByIdUser(id);
+            ObjectMapper objectMapper = new ObjectMapper();
+            String json = objectMapper.writeValueAsString(userData);
+            System.out.println(json);
+            return ResponseEntity.ok(json);
+        }catch (Exception e) {
+            return ResponseEntity.badRequest().body("Wrong id user");
+        }
+    }
+    @PostMapping("/{id}")
+    public ResponseEntity<String> saveUser(@RequestBody String json) {
         ObjectMapper objectMapper = new ObjectMapper();
-        String json = objectMapper.writeValueAsString(userData);
-        System.out.println(json);
-        return ResponseEntity.ok(json);
+        try {
+            User userData = objectMapper.readValue(json, User.class);
+            userService.SaveUser(userData);
+            return ResponseEntity.ok("User save successfully");
+        } catch (JsonProcessingException e) {
+            return ResponseEntity.badRequest().body("Invalid JSON format");
+        }
     }
 }
 

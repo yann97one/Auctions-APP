@@ -34,4 +34,17 @@ public class User implements Serializable {
         this.role = role;
         this.credit = credit;
     }
+    public User(long id,String name, String pseudo, String firstname, String email, String password, String phone, String road, String zip, String city, int credit) {
+        this.id=id;
+        this.name = name;
+        this.pseudo = pseudo;
+        this.firstname = firstname;
+        this.email = email;
+        this.password = password;
+        this.phone = phone;
+        this.road = road;
+        this.zip = zip;
+        this.city = city;
+        this.credit = credit;
+    }
 }
