@@ -3,7 +3,6 @@ package fr.eni.server.controller;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import fr.eni.server.bo.User;
 import fr.eni.server.service.UserService;
-import fr.eni.server.service.UserServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -24,7 +23,7 @@ public class UserController {
 
     @GetMapping()
     public ResponseEntity<String> findAllUser() throws JsonProcessingException {
-        List<User> userData =  userService.findAllUser();
+        List<User> userData = userService.findAllUser();
         ObjectMapper objectMapper = new ObjectMapper();
         String json = objectMapper.writeValueAsString(userData);
         System.out.println(json);
@@ -55,19 +54,19 @@ public class UserController {
             userService.DeleteUser(id);
             String response = "Delete user ok";
             return ResponseEntity.ok(response);
-        }catch (Exception e) {
-        return ResponseEntity.badRequest().body("Invalid JSON format");
-    }
+        } catch (Exception e) {
+            return ResponseEntity.badRequest().body("Invalid JSON format");
+        }
     }
     @GetMapping("/{id}")
     public ResponseEntity<String> getUserById(@PathVariable("id") Long id) throws Exception {
         try {
-            User userData =  userService.FindByIdUser(id);
+            User userData = userService.FindByIdUser(id);
             ObjectMapper objectMapper = new ObjectMapper();
             String json = objectMapper.writeValueAsString(userData);
             System.out.println(json);
             return ResponseEntity.ok(json);
-        }catch (Exception e) {
+        } catch (Exception e) {
             return ResponseEntity.badRequest().body("Wrong id user");
         }
     }
