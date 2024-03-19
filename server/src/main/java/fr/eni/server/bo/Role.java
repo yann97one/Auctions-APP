@@ -1,6 +1,6 @@
 package fr.eni.server.bo;
 
 public enum Role {
-    ADMINISTRATEUR,
-    UTILISATEUR
+    ADMIN,
+    USER
 }
