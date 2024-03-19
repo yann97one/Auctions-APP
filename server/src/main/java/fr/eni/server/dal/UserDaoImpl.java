@@ -12,11 +12,11 @@ import java.util.List;
 @Repository
 public class UserDaoImpl implements UserDAO {
 
-    public final String INSERT = "INSERT INTO Users(firstname,lastname,email,pseudo,phone,road,zip,city,user_password,credit,role) VALUES "
-            + " (:firstname, :lastname, :email, :pseudo,:phone,:road,:zip,:city,:user_password,:credit,:role)";
+    public final String INSERT = "INSERT INTO Users(firstname,lastname,email,pseudo,phone,road,zip,city,password,credit,role) VALUES "
+            + " (:firstname, :lastname, :email, :pseudo,:phone,:road,:zip,:city,:password,:credit,:role)";
 
     public final String UPDATE = "UPDATE Users SET"
-            + " firstname=:firstname , lastname=:lastname , email=:email , pseudo=:pseudo , phone=:phone , road=:road , zip=:zip , city=:city , user_password=:user_password , credit=:credit WHERE id_user=:id_user";
+            + " firstname=:firstname , lastname=:lastname , email=:email , pseudo=:pseudo , phone=:phone , road=:road , zip=:zip , city=:city , password=:password , credit=:credit WHERE id_user=:id_user";
     private final String FIND_ALL = "SELECT * FROM Users";
 
     private final String FIND_BY_ID = "SELECT * FROM Users where id_user=:id_user";
@@ -38,7 +38,7 @@ public class UserDaoImpl implements UserDAO {
         namedParameters.addValue("road",user.getRoad());
         namedParameters.addValue("zip",user.getZip());
         namedParameters.addValue("city",user.getCity());
-        namedParameters.addValue("user_password",user.getPassword());
+        namedParameters.addValue("password",user.getPassword());
         namedParameters.addValue("credit",user.getCredit());
         namedParameters.addValue("role",user.getRole().name());
         jdbcTemplate.update(INSERT, namedParameters);
@@ -74,7 +74,7 @@ public class UserDaoImpl implements UserDAO {
         namedParameters.addValue("road",user.getRoad());
         namedParameters.addValue("zip",user.getZip());
         namedParameters.addValue("city",user.getCity());
-        namedParameters.addValue("user_password",user.getPassword());
+        namedParameters.addValue("password",user.getPassword());
         namedParameters.addValue("credit",user.getCredit());
         namedParameters.addValue("id_user",user.getId());
         jdbcTemplate.update(UPDATE, namedParameters);
