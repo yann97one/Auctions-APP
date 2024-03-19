@@ -17,4 +17,9 @@ export const AUTH_ROUTES: ReactRoute[] = [
         component: lazy(() => import("../components/Auctions/Auction")),
         roles: [],
     },
+    {
+        path: "/bbb",
+        component: lazy(() => import("../components/Profile/ViewProfile")),
+        roles: [],
+    },
 ]

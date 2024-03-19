@@ -20,7 +20,7 @@ function AuctionCard() {
                 <br/>
                 <p className="mt-1.5 text-sm text-gray-700">Vendeur : {" "}
                     <a
-                        href="/#"
+                        href="/bbb"
                         className="font-medium text-primary-600 hover:underline dark:text-primary-500"
                     >
                         aaa
