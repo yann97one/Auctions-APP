@@ -31,19 +31,21 @@ import java.util.stream.Collectors;
 public class AuthController {
 
 
-    private final UserService userService;
+    @Autowired
+    private  UserService userService;
 
-
+    @Autowired
     private AuthenticationManager authenticationManager;
 
     @Autowired
     private JwtUtils jwtUtils;
 
-    @Autowired
-    public AuthController(UserService userService, AuthenticationManager authenticationManager) {
-        this.userService = userService;
-        this.authenticationManager = authenticationManager;
-    }
+
+//    @Autowired
+//    public AuthController(UserService userService, AuthenticationManager authenticationManager) {
+//        this.userService = userService;
+//        this.authenticationManager = authenticationManager;
+//    }
 
     @PostMapping("/login")
     public ResponseEntity<UserDto> login(@RequestBody CredentialsDTO credentialsDto) {
