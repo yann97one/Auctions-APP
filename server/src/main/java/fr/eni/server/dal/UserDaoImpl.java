@@ -2,7 +2,6 @@ package fr.eni.server.dal;
 
 import fr.eni.server.bo.User;
 import fr.eni.server.dal.rowMapper.UserRowMapper;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
@@ -15,6 +14,9 @@ public class UserDaoImpl implements UserDAO {
 
     public final String INSERT = "INSERT INTO Users(firstname,lastname,email,pseudo,phone,road,zip,city,user_password,credit,role) VALUES "
             + " (:firstname, :lastname, :email, :pseudo,:phone,:road,:zip,:city,:user_password,:credit,:role)";
+
+    public final String UPDATE = "UPDATE Users SET"
+            + " firstname=:firstname , lastname=:lastname , email=:email , pseudo=:pseudo , phone=:phone , road=:road , zip=:zip , city=:city , user_password=:user_password , credit=:credit WHERE id_user=:id_user";
     private final String FIND_ALL = "SELECT * FROM Users";
 
     private final String FIND_BY_ID = "SELECT * FROM Users where id_user=:id_user";
@@ -60,4 +62,22 @@ public class UserDaoImpl implements UserDAO {
         List<User> users= jdbcTemplate.query(FIND_BY_ID, namedParameters, new UserRowMapper());
         return users.get(0);
     }
+
+    @Override
+    public void saveUser(User user) {
+        MapSqlParameterSource namedParameters = new MapSqlParameterSource();
+        namedParameters.addValue("firstname",user.getFirstname());
+        namedParameters.addValue("lastname",user.getName());
+        namedParameters.addValue("email",user.getEmail());
+        namedParameters.addValue("pseudo",user.getPseudo() );
+        namedParameters.addValue("phone",user.getPhone());
+        namedParameters.addValue("road",user.getRoad());
+        namedParameters.addValue("zip",user.getZip());
+        namedParameters.addValue("city",user.getCity());
+        namedParameters.addValue("user_password",user.getPassword());
+        namedParameters.addValue("credit",user.getCredit());
+        namedParameters.addValue("id_user",user.getId());
+        jdbcTemplate.update(UPDATE, namedParameters);
+    }
 }
+
