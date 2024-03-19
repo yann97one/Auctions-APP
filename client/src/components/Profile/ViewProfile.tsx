@@ -1,9 +1,20 @@
-import {useNavigate} from "react-router-dom";
+import {useNavigate, useParams} from "react-router-dom";
+import {useEffect} from "react";
+import {apiClient} from "../../api";
 
-function ViewProfile () {
+function ViewProfile() {
 
     const navigate = useNavigate();
+    const {id} = useParams();
 
+    const getUserDetail = async () => {
+        const response = apiClient
+    }
+
+    useEffect(() => {
+        console.log(id)
+
+    }, [id])
 
     return (
         <div>

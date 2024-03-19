@@ -25,7 +25,7 @@ public class SecurityConfig {
                 .exceptionHandling(exception -> exception.authenticationEntryPoint(userAuthenticationEntryPoint))
                 .addFilterBefore(new JwtAuthFilter(userAuthProvider), BasicAuthenticationFilter.class)
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
-                .authorizeHttpRequests(authorize -> authorize.requestMatchers(HttpMethod.POST, "/auth/register", "/auth/", "/auth/login").permitAll()
+                .authorizeHttpRequests(authorize -> authorize.requestMatchers(HttpMethod.POST, "/auth/register", "/auth/", "/auth/login", "/auth/detail").permitAll()
                         .anyRequest().authenticated());
         return http.build();
     }

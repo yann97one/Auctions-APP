@@ -1,33 +1,54 @@
 import {useEffect, useState} from 'react';
 import logo from '../../assets/eni-logo.png';
+import {getTokenFromStorage, getTokenPayload} from "../../services/localStorage";
 
 interface Props {
     extraItems?: NavBarItem[];
 }
 
 function NavBar(props: Props) {
+    const token = getTokenFromStorage();
     const {extraItems} = props;
     const [isMenuOpen, setIsMenuOpen] = useState(false);
+
+    const user = getTokenPayload(token!)
+
 
     const toggleMenu = () => {
         setIsMenuOpen(!isMenuOpen);
     };
 
 
-    const menuItems: NavBarItem[] = [
+    const authenticatedMenuItems: NavBarItem[] = [
+        {
+            href: `profile/${user?.id}`,
+            itemLabel: 'Mon profil',
+        },
+        {
+            href: '/logout',
+            itemLabel: 'Se déconnecter',
+        }
+    ]
+
+    const unauthenticatedMenuItems: NavBarItem[] = [
         {
             href: '/login',
             itemLabel: 'Se connecter/S\'inscrire',
         },
-
     ]
+
+    const menuItems: NavBarItem[] = []
+
+    if (token != "undefined") menuItems.push(...authenticatedMenuItems);
+    else menuItems.push(...unauthenticatedMenuItems);
+
 
     useEffect(() => {
         if (extraItems) {
             menuItems.push(...extraItems);
         }
         console.log(menuItems)
-
+        console.log(user)
     }, [extraItems]);
 
     return (
@@ -55,6 +76,8 @@ function NavBar(props: Props) {
                                    className="'block py-2 px-3 text-white bg-blue-700 rounded md:bg-transparent md:text-blue-700 md:p-0 dark:text-white md:dark:text-blue-500'">{item.itemLabel}</a>
                             </li>
                         ))}
+
+                        {/*<Link to={`/profile/${user?.id}`}>Mon Profil</Link>*/}
                     </ul>
                 </div>
             </div>

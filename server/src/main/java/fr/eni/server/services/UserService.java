@@ -38,22 +38,19 @@ public class UserService implements IUserService {
     }
 
     @Override
-    public Object getOne(long Id) {
-        return null;
+    public User getOne(long id) {
+        return userDao.getById(id);
     }
 
-//    @Override
-//    public User findByLogin(String email, String password) {
-//        return;
-//    }
 
     @Override
     public UserDto register(SignUpDto userDto) {
-//        Optional<User> userOptional = Optional.ofNullable(userDao.findByLogin(userDto.email(), userDto.pseudo()));
-//
-//        if (userOptional.isPresent()) {
-//            throw new AppException("User already exist", HttpStatus.BAD_REQUEST);
-//        }
+        Optional<User> userOptional = Optional.ofNullable(userDao.findByLogin(userDto.email(), userDto.pseudo()));
+
+        if (userOptional.isPresent()) {
+            throw new AppException("User already exist", HttpStatus.BAD_REQUEST);
+        }
+
         User user = userMapper.signUpToUser(userDto);
         user.setPassword(passwordEncoder.encode(userDto.password()));
         user.setRole(Role.USER);

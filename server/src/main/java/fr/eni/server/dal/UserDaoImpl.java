@@ -67,8 +67,7 @@ public class UserDaoImpl implements UserDao {
     public User getById(long userId) {
         MapSqlParameterSource namedParameters = new MapSqlParameterSource();
         namedParameters.addValue("id_user", userId);
-        List<User> users = jdbcTemplate.query(FIND_BY_ID, namedParameters, new UserRowMapper());
-        return users.get(0);
+        return jdbcTemplate.queryForObject(FIND_BY_ID, namedParameters, new UserRowMapper());
     }
 
     @Override

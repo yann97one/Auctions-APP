@@ -1,5 +1,6 @@
 package fr.eni.server.controller;
 
+import fr.eni.server.bo.User;
 import fr.eni.server.config.UserAuthProvider;
 import fr.eni.server.dto.CredentialsDTO;
 import fr.eni.server.dto.SignUpDto;
@@ -12,6 +13,7 @@ import org.springframework.web.bind.annotation.*;
 import java.net.URI;
 import java.util.List;
 
+@CrossOrigin("*")
 @RequiredArgsConstructor
 @RestController
 @RequestMapping("/auth")
@@ -21,13 +23,13 @@ public class AuthController {
     private final UserAuthProvider userAuthProvider;
 
     @PostMapping("/login")
-    public ResponseEntity<String> login(@RequestBody CredentialsDTO credentialsDto) {
+    public ResponseEntity<UserDto> login(@RequestBody CredentialsDTO credentialsDto) {
         System.out.println(credentialsDto);
         UserDto userDto = userService.login(credentialsDto);
 
         userDto.setToken(userAuthProvider.createToken(userDto));
         System.out.println(userDto);
-        return ResponseEntity.ok(userDto.getToken());
+        return ResponseEntity.ok(userDto);
     }
 
     @PostMapping("/register")
@@ -39,4 +41,10 @@ public class AuthController {
         return ResponseEntity.created(URI.create("/users/" + createdUser.getId())).body(createdUser);
 
     }
+
+    @GetMapping("/detail")
+    public ResponseEntity<User> getUserDetail() {
+        return ResponseEntity.ok(userService.getOne(4));
+    }
+
 }
