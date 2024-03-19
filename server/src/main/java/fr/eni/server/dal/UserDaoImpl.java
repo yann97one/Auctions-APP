@@ -20,6 +20,7 @@ public class UserDaoImpl implements UserDao {
             + " (:firstname, :lastname, :email, :pseudo,:phone,:road,:zip,:city,:password,:credit,:role)";
     private final String FIND_ALL = "SELECT * FROM Users";
 
+    private final String FIND_BY_EMAIL = "SELECT * FROM Users where email=:email";
     private final String FIND_BY_ID = "SELECT * FROM Users where id_user=:id_user";
 
     private final String FIND_BY_LOGIN = "SELECT * FROM Users where  email=:email";
@@ -77,5 +78,12 @@ public class UserDaoImpl implements UserDao {
         //namedParameters.addValue("password", password);
         return jdbcTemplate.queryForObject(FIND_BY_LOGIN, namedParameters, new UserRowMapper());
 
+    }
+
+    @Override
+    public User findByEmail(String email) {
+        MapSqlParameterSource namedParameters = new MapSqlParameterSource();
+        namedParameters.addValue("email", email);
+        return jdbcTemplate.queryForObject(FIND_BY_EMAIL, namedParameters, new UserRowMapper());
     }
 }

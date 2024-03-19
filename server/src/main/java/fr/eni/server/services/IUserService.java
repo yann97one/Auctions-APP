@@ -10,5 +10,7 @@ public interface IUserService extends IService {
 
     UserDto register(SignUpDto user);
 
+    User getByEmail(String email);
+
     UserDto login(CredentialsDTO credentialsDTO);
 }

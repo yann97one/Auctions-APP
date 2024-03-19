@@ -1,46 +1,77 @@
 package fr.eni.server.controller;
 
+import fr.eni.server.bo.Role;
 import fr.eni.server.bo.User;
-import fr.eni.server.config.UserAuthProvider;
+import fr.eni.server.security.jwt.JwtUtils;
+import fr.eni.server.security.services.UserDetailsImpl;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseCookie;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.authentication.AuthenticationManager;
+
 import fr.eni.server.dto.CredentialsDTO;
 import fr.eni.server.dto.SignUpDto;
 import fr.eni.server.dto.UserDto;
 import fr.eni.server.services.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.*;
 
 import java.net.URI;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @CrossOrigin("*")
-@RequiredArgsConstructor
+
 @RestController
-@RequestMapping("/auth")
+@RequestMapping("/api/auth")
 public class AuthController {
 
+
     private final UserService userService;
-    private final UserAuthProvider userAuthProvider;
+
+
+    private AuthenticationManager authenticationManager;
+
+    @Autowired
+    private JwtUtils jwtUtils;
+
+    @Autowired
+    public AuthController(UserService userService, AuthenticationManager authenticationManager) {
+        this.userService = userService;
+        this.authenticationManager = authenticationManager;
+    }
 
     @PostMapping("/login")
     public ResponseEntity<UserDto> login(@RequestBody CredentialsDTO credentialsDto) {
-        System.out.println(credentialsDto);
-        UserDto userDto = userService.login(credentialsDto);
+        Authentication authentication = authenticationManager.authenticate(
+                new UsernamePasswordAuthenticationToken(credentialsDto.getEmail(), credentialsDto.getPassword())
+        );
 
-        userDto.setToken(userAuthProvider.createToken(userDto));
-        System.out.println(userDto);
-        return ResponseEntity.ok(userDto);
-    }
+        SecurityContextHolder.getContext().setAuthentication(authentication);
 
-    @PostMapping("/register")
-    public ResponseEntity<UserDto> register(@RequestBody SignUpDto signupDto) {
-        System.out.println(signupDto);
-        UserDto createdUser = userService.register(signupDto);
-        createdUser.setToken(userAuthProvider.createToken(createdUser));
+        UserDetailsImpl userDetails = (UserDetailsImpl) authentication.getPrincipal();
 
-        return ResponseEntity.created(URI.create("/users/" + createdUser.getId())).body(createdUser);
+        ResponseCookie jwtCookie = jwtUtils.generateJwtCookie(userDetails);
+
+        User user = userService.getByEmail(credentialsDto.getEmail());
+
+        return ResponseEntity.ok(UserDto.build(user));
 
     }
+
+//    @PostMapping("/register")
+//    public ResponseEntity<UserDto> register(@RequestBody SignUpDto signupDto) {
+//        System.out.println(signupDto);
+//        UserDto createdUser = userService.register(signupDto);
+//        createdUser.setToken(userAuthProvider.createToken(createdUser));
+//
+//        return ResponseEntity.created(URI.create("/users/" + createdUser.getId())).body(createdUser);
+//
+//    }
 
     @GetMapping("/detail")
     public ResponseEntity<User> getUserDetail() {

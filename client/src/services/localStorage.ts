@@ -7,7 +7,8 @@ const saveTokenInStorage = (token: string) =>
     localStorage.setItem("auth_token", token);
 
 const getTokenPayload = (token: string) => {
-    return jwtDecode<JwtPayload>(token)
+    return jwtDecode<JwtPayload>(token!);
+
 };
 
 export {getTokenFromStorage, saveTokenInStorage, getTokenPayload};

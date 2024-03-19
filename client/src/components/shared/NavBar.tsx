@@ -1,5 +1,6 @@
 import {useEffect, useState} from 'react';
 import logo from '../../assets/eni-logo.png';
+import {JwtPayload} from "../../api/loginService/types";
 import {getTokenFromStorage, getTokenPayload} from "../../services/localStorage";
 
 interface Props {
@@ -7,11 +8,9 @@ interface Props {
 }
 
 function NavBar(props: Props) {
-    const token = getTokenFromStorage();
     const {extraItems} = props;
     const [isMenuOpen, setIsMenuOpen] = useState(false);
-
-    const user = getTokenPayload(token!)
+    const [token, setToken] = useState<JwtPayload | undefined>(undefined);
 
 
     const toggleMenu = () => {
@@ -21,7 +20,7 @@ function NavBar(props: Props) {
 
     const authenticatedMenuItems: NavBarItem[] = [
         {
-            href: `profile/${user?.id}`,
+            href: `profile/${token?.id}`,
             itemLabel: 'Mon profil',
         },
         {
@@ -39,17 +38,25 @@ function NavBar(props: Props) {
 
     const menuItems: NavBarItem[] = []
 
-    if (token != "undefined") menuItems.push(...authenticatedMenuItems);
+    if (token != undefined) menuItems.push(...authenticatedMenuItems);
     else menuItems.push(...unauthenticatedMenuItems);
+    const manageToken = () => {
+        const storage = getTokenFromStorage();
 
+        if (storage) {
+            const tokenPayload = getTokenPayload(storage);
+            setToken(tokenPayload);
+        }
+
+    }
 
     useEffect(() => {
         if (extraItems) {
             menuItems.push(...extraItems);
         }
-        console.log(menuItems)
-        console.log(user)
-    }, [extraItems]);
+
+        manageToken();
+    }, [extraItems, token]);
 
     return (
         <nav className="bg-white border border-amber-100 dark:bg-gray-900 mb-16">

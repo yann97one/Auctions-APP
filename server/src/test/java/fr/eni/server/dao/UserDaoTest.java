@@ -3,7 +3,6 @@ package fr.eni.server.dao;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 import fr.eni.server.bo.Role;
-import fr.eni.server.dal.UserDAO;
 import fr.eni.server.dal.UserDaoImpl;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;

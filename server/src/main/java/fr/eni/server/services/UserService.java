@@ -58,6 +58,11 @@ public class UserService implements IUserService {
         return userMapper.toUserDto(user);
     }
 
+    @Override
+    public User getByEmail(String email) {
+        return userDao.findByEmail(email);
+    }
+
 
     @Override
     public UserDto login(CredentialsDTO credentialsDTO) {
