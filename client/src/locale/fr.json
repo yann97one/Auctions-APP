@@ -1,0 +1,47 @@
+{
+
+  "login": {
+    "title": "Connexion",
+    "email": "Adresse e-mail",
+    "password": "Mot de passe",
+    "rememberMe": "Se souvenir de moi",
+    "forgotPassword": "Mot de passe oublié?",
+    "signIn": "Connexion",
+    "noAccount": "Vous n'avez pas de compte?",
+    "signUp": "S'inscrire"
+  },
+  "register": {
+    "title": "Inscription",
+    "name": "Nom",
+    "email": "Adresse e-mail",
+    "password": "Mot de passe",
+    "confirmPassword": "Confirmer le mot de passe",
+    "signUp": "S'inscrire",
+    "alreadyHaveAccount": "Vous avez déjà un compte?",
+    "signIn": "Connexion"
+  },
+  "sell": {
+    "notStarted": "Ventes non débutées",
+    "ended": "Ventes terminées",
+    "inProgress": "Ventes en cours",
+    "mySales": "Mes ventes"
+  },
+  "purchases": {
+    "title": "Mes achats",
+    "openAuctions": "Enchères ouvertes",
+    "myBids": "Mes enchères",
+    "myWinningBids": "Mes enchères remportées"
+  },
+  "filter": {
+    "search": "Rechercher",
+    "searchPlaceholder": "Recherche pour un produit...",
+    "searchButton": "Rechercher",
+    "category": "Categories",
+    "selected": "{count, plural, =0 {No selected} one {# selected} other {# selected}}",
+    "reset": "Reset",
+    "it": "Informatique",
+    "furniture": "Ameublement",
+    "clothing": "Vêtement",
+    "hobby": "Sports et loisirs"
+  }
+}

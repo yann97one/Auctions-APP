@@ -1,5 +1,8 @@
-function Filter() {
 
+import { useTranslation} from "react-i18next";
+
+function Filter() {
+    const { t } = useTranslation();
     return (
 
         <div className="max-w-md ml-16">
@@ -8,7 +11,7 @@ function Filter() {
                     htmlFor="default-search"
                     className="mb-2 text-sm font-medium text-gray-900 sr-only dark:text-white"
                 >
-                    Search
+                    {t('search')}
                 </label>
                 <div className="relative ">
                     <div className="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none">
@@ -37,7 +40,7 @@ function Filter() {
                         type="submit"
                         className="text-white absolute end-2.5 bottom-2.5 bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
                     >
-                        Rechercher
+                        {t('searchButton')}
                     </button>
                 </div>
             </form>
@@ -49,7 +52,7 @@ function Filter() {
                     <summary
                         className="flex cursor-pointer items-center justify-between gap-2 bg-gray-50 p-4 text-gray-900 transition "
                     >
-                        <span className="text-sm font-medium"> Catégorie </span>
+                        <span className="text-sm font-medium"> {t('category')} </span>
 
                         <span className="transition group-open:-rotate-180">
                             <svg
@@ -67,7 +70,7 @@ function Filter() {
 
                     <div className="border-t border-gray-200 bg-gray-50">
                         <header className="flex items-center justify-between p-4">
-                            <span className="text-sm text-gray-700"> 0 Selected </span>
+                            <span className="text-sm text-gray-700">  0 Selected</span>
 
                             <button type="button" className="text-sm text-gray-900 underline underline-offset-4">
                                 Reset
@@ -80,7 +83,7 @@ function Filter() {
                                     <input type="checkbox" id="FilterInformatique"
                                            className="size-5 rounded border-gray-300"/>
 
-                                    <span className="text-sm font-medium text-gray-700"> Informatique </span>
+                                    <span className="text-sm font-medium text-gray-700"> {t('informatique')} </span>
                                 </label>
                             </li>
 
@@ -89,7 +92,7 @@ function Filter() {
                                     <input type="checkbox" id="FilterAmeublement"
                                            className="size-5 rounded border-gray-300"/>
 
-                                    <span className="text-sm font-medium text-gray-700"> Ameublement </span>
+                                    <span className="text-sm font-medium text-gray-700"> {t('ameublement')} </span>
                                 </label>
                             </li>
 
@@ -98,7 +101,7 @@ function Filter() {
                                     <input type="checkbox" id="FilterVetement"
                                            className="size-5 rounded border-gray-300"/>
 
-                                    <span className="text-sm font-medium text-gray-700"> Vêtement </span>
+                                    <span className="text-sm font-medium text-gray-700"> {t('vetement')} </span>
                                 </label>
                             </li>
 
@@ -107,7 +110,7 @@ function Filter() {
                                     <input type="checkbox" id="FilterSport&Loisirs"
                                            className="size-5 rounded border-gray-300"/>
 
-                                    <span className="text-sm font-medium text-gray-700"> Sport & loisirs </span>
+                                    <span className="text-sm font-medium text-gray-700">  {t('sportLoisirs')} </span>
                                 </label>
                             </li>
                         </ul>

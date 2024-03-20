@@ -1,6 +1,9 @@
 import {useState} from "react";
+import {useTranslation} from "react-i18next";
+
 
 function FilterLog() {
+    const { t } = useTranslation();
 
         const [checked, setDisabled] = useState(true);
         const [checked2, setDisabled2] = useState(false);
@@ -33,7 +36,7 @@ function FilterLog() {
                         htmlFor="default-radio-1"
                         className="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300"
                     >
-                        Mes achats
+                        {t("purchases.title")}
                     </label>
 
                     <div className="ml-6">
@@ -48,7 +51,7 @@ function FilterLog() {
                             htmlFor="default-checkbox"
                             className="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300"
                         >
-                            Enchères ouvertes
+                            {t("purchases.openAuctions")}
                         </label>
                     </div>
                     <div className="flex items-center my-4">
@@ -63,7 +66,7 @@ function FilterLog() {
                             htmlFor="checked-checkbox"
                             className="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300"
                         >
-                            Mes enchères
+                            {t("purchases.myBids")}
                         </label>
                     </div>
                     <div className="flex items-center my-4">
@@ -78,7 +81,7 @@ function FilterLog() {
                             htmlFor="checked-checkbox"
                             className="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300"
                         >
-                            Mes enchères remportées
+                            {t("purchases.myWinningBids")}
                         </label>
                     </div>
                     </div>
@@ -98,7 +101,7 @@ function FilterLog() {
                         htmlFor="default-radio-2"
                         className="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300"
                     >
-                        Mes ventes
+                        {t("sell.mySales")}
                     </label>
 
                     <div className="ml-6">
@@ -114,7 +117,7 @@ function FilterLog() {
                             htmlFor="default-checkbox"
                             className="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300"
                         >
-                            Mes ventes en cours
+                            {t("sell.inProgress")}
                         </label>
                     </div>
                     <div className="flex items-center my-4">
@@ -129,7 +132,7 @@ function FilterLog() {
                             htmlFor="checked-checkbox"
                             className="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300"
                         >
-                            Ventes non débutées
+                            {t("sell.notStarted")}
                         </label>
                     </div>
                     <div className="flex items-center my-4">
@@ -144,7 +147,7 @@ function FilterLog() {
                             htmlFor="checked-checkbox"
                             className="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300"
                         >
-                            Ventes terminées
+                            {t("sell.ended")}
                         </label>
                     </div>
                 </div>

@@ -1,11 +1,15 @@
 import {useEffect, useState} from 'react';
 import logo from '../../assets/eni-logo.png';
+import i18n from "i18next";
+import {useTranslation} from "react-i18next";
 
 interface Props {
     extraItems?: NavBarItem[];
 }
 
 function NavBar(props: Props) {
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+
     const {extraItems} = props;
 
     const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -26,13 +30,22 @@ function NavBar(props: Props) {
             menuItems.push(...extraItems);
         }
     }, [extraItems]);
-
+    const changeLanguage = (language) => {
+        i18n.changeLanguage(language);
+    };
     return (
+
         <nav className="bg-white border border-amber-100 dark:bg-gray-900 mb-16">
+
             <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
+
                 <a href="/" className="text-lg font-semibold text-gray-900 dark:text-white">
                     <img src={logo} alt="ENI" className="w-100 h-100"/>
                 </a>
+                <div>
+                    <button type="submit" onClick={() => changeLanguage('fr')}>Français /</button>
+                    <button type="submit" onClick={() => changeLanguage('en')}> English</button>
+                </div>
 
                 <button onClick={toggleMenu} type="button"
                         className="inline-flex items-center p-2 w-10 h-10 justify-center text-sm text-gray-500 rounded-lg md:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600"
