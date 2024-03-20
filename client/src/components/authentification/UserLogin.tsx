@@ -2,7 +2,10 @@
 
 import {LoginCredentials} from "../../api/loginService/types";
 import {useState} from "react";
-import {apiClient} from "../../api";
+import {useNavigate} from "react-router-dom";
+import {useUser} from "../../hooks/UserContext";
+import {apiClient} from "@api";
+import {saveTokenInStorage} from "@services/localStorage";
 
 const INITIAL_STATE: LoginCredentials = {
     email: "",
@@ -11,14 +14,23 @@ const INITIAL_STATE: LoginCredentials = {
 }
 
 function UserLogin() {
-    //const navigate = useNavigate();
+    const {setUser} = useUser();
+
+    const navigate = useNavigate();
     const [credentials, setCredentials] = useState(INITIAL_STATE);
 
     const onSubmit: React.MouseEventHandler<HTMLButtonElement> = async (event) => {
         event.preventDefault()
-        const response = await apiClient.auth.authUser(credentials)
-        console.log(response)
+        try {
+            const user = await apiClient.auth.authUser(credentials)
+            saveTokenInStorage(user.token)
+            setUser(user)
+            navigate("/")
+        } catch (error) {
+            console.log(error)
+        }
     }
+
 
     return (
         <div className="flex flex-col items-center justify-center px-6 py-8 mx-auto md:h-full lg:py-0">

@@ -1,8 +1,10 @@
 package fr.eni.server.bo;
 
+import fr.eni.server.dto.SignUpDto;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+
 
 import java.io.Serializable;
 
@@ -37,4 +39,10 @@ public class User implements Serializable {
         this.role = role;
         this.credit = credit;
     }
+
+    public static  User fromSIgnupToUser(SignUpDto signUpDto) {
+        return new User(signUpDto.lastName(), signUpDto.pseudo(), signUpDto.firstName(), signUpDto.email(), signUpDto.password(), signUpDto.phoneNumber(), signUpDto.road(), signUpDto.zipCode(), signUpDto.city(), Role.USER, 0);
+    }
+
+
 }
