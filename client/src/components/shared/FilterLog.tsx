@@ -18,7 +18,6 @@ function FilterLog() {
     return (
 
         <div className="max-w-md ml-16">
-
             <div className="flex flex-wrap -mx-3 ">
                 <div className="md:w-1/2 px-2">
                     <input
