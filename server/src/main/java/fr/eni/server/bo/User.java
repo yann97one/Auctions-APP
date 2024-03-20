@@ -1,7 +1,10 @@
 package fr.eni.server.bo;
+
+import fr.eni.server.dto.SignUpDto;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+
 
 import java.io.Serializable;
 
@@ -10,28 +13,35 @@ import java.io.Serializable;
 @Data
 public class User implements Serializable {
     private long id;
-    private String nom;
+    private String lastName;
     private String pseudo;
-    private String prenom;
+    private String firstName;
     private String email;
     private String password;
-    private String telephone;
-    private String rue;
-    private String codePostal;
-    private String ville;
+    private String phoneNumber;
+    private String road;
+    private String zipCode;
+    private String city;
     private Role role;
+    private int credit;
 
-    public User(String nom, String pseudo, String prenom, String email, String password, String telephone, String rue, String codePostal, String ville, Role role) {
-        this.nom = nom;
+
+    public User(String lastName, String pseudo, String firstName, String email, String password, String phoneNumber, String road, String zipCode, String city, Role role, int credit) {
+        this.lastName = lastName;
         this.pseudo = pseudo;
-        this.prenom = prenom;
+        this.firstName = firstName;
         this.email = email;
         this.password = password;
-        this.telephone = telephone;
-        this.rue = rue;
-        this.codePostal = codePostal;
-        this.ville = ville;
+        this.phoneNumber = phoneNumber;
+        this.road = road;
+        this.zipCode = zipCode;
+        this.city = city;
         this.role = role;
+        this.credit = credit;
+    }
+
+    public static  User fromSIgnupToUser(SignUpDto signUpDto) {
+        return new User(signUpDto.lastName(), signUpDto.pseudo(), signUpDto.firstName(), signUpDto.email(), signUpDto.password(), signUpDto.phoneNumber(), signUpDto.road(), signUpDto.zipCode(), signUpDto.city(), Role.USER, 0);
     }
 
 

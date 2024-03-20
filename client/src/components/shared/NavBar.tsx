@@ -1,4 +1,4 @@
-import {useEffect, useState} from 'react';
+import {useState} from 'react';
 import logo from '../../assets/eni-logo.png';
 
 interface Props {
@@ -10,22 +10,11 @@ function NavBar(props: Props) {
 
     const [isMenuOpen, setIsMenuOpen] = useState(false);
 
+
     const toggleMenu = () => {
         setIsMenuOpen(!isMenuOpen);
     };
 
-    const menuItems: NavBarItem[] = [
-        {
-            href: '/login',
-            itemLabel: 'Se connecter/S\'inscrire',
-        }
-    ]
-
-    useEffect(() => {
-        if (extraItems) {
-            menuItems.push(...extraItems);
-        }
-    }, [extraItems]);
 
     return (
         <nav className="bg-white border border-amber-100 dark:bg-gray-900 mb-16">
@@ -46,12 +35,14 @@ function NavBar(props: Props) {
                 </button>
                 <div className={`w-full md:block md:w-auto ${isMenuOpen ? 'block' : 'hidden'}`} id="navbar-default">
                     <ul className="font-medium flex flex-col p-4 md:p-0 mt-4 border border-gray-100 rounded-lg bg-gray-50 md:flex-row md:space-x-8 rtl:space-x-reverse md:mt-0 md:border-0 md:bg-white dark:bg-gray-800 md:dark:bg-gray-900 dark:border-gray-700">
-                        {menuItems.map((item, index) => (
+                        {extraItems!.map((item, index) => (
                             <li key={index}>
                                 <a href={item.href}
                                    className="'block py-2 px-3 text-white bg-blue-700 rounded md:bg-transparent md:text-blue-700 md:p-0 dark:text-white md:dark:text-blue-500'">{item.itemLabel}</a>
                             </li>
                         ))}
+
+                        {/*<Link to={`/profile/${user?.id}`}>Mon Profil</Link>*/}
                     </ul>
                 </div>
             </div>
