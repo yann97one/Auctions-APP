@@ -1,5 +1,7 @@
 package fr.eni.server.bo;
 import lombok.*;
+
+import java.sql.Timestamp;
 import java.time.LocalDate;
 
 @AllArgsConstructor
@@ -9,14 +11,14 @@ public class Selled {
     private long id;
     private String name;
     private String description;
-    private LocalDate beginDate;
-    private LocalDate endDate;
+    private Timestamp beginDate;
+    private Timestamp endDate;
     private int initialPrice;
     private int sellPrice;
     private int userId;
     private int idCategory;
-
-    public Selled(String name, String description, LocalDate beginDate, LocalDate endDate, int initialPrice, int sellPrice, int userId, int idCategory) {
+    private String pseudo;
+    public Selled(String name, String description, Timestamp beginDate, Timestamp endDate, int initialPrice, int sellPrice, int userId, int idCategory) {
         this.name = name;
         this.description = description;
         this.beginDate = beginDate;

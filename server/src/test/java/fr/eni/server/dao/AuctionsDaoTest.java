@@ -37,5 +37,9 @@ class AuctionsDaoTest {
         long id=5;
         dao.delete(id);
 
+
+        Auctions auctions2 = new Auctions(100, 2, 1,date2 );
+        dao.verifyPrice(auctions2);
+
     }
 }

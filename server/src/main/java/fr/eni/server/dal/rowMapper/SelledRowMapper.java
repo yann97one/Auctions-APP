@@ -16,12 +16,13 @@ public class SelledRowMapper implements RowMapper<Selled> {
         selled.setId(rs.getLong("id_article"));
         selled.setName(rs.getString("article_name"));
         selled.setDescription(rs.getString("description"));
-        selled.setBeginDate(rs.getDate("auction_begin_date").toLocalDate());
-        selled.setEndDate(rs.getDate("auction_end_date").toLocalDate());
+        selled.setBeginDate(rs.getTimestamp("auction_begin_date"));
+        selled.setEndDate(rs.getTimestamp("auction_end_date"));
         selled.setInitialPrice(rs.getInt("initial_price"));
         selled.setSellPrice(rs.getInt("sell_price"));
         selled.setUserId(rs.getInt("user_id"));
         selled.setIdCategory(rs.getInt("category_id"));
+        selled.setPseudo(rs.getString("pseudo"));
         return selled;
     }
 }

@@ -17,7 +17,7 @@ public class AuctionsRowMapper implements RowMapper<Auctions> {
         auctions.setDate(sqlDate);
         auctions.setId_article(rs.getInt("id_article"));
         auctions.setId_user(rs.getInt("id_user"));
-        auctions.setPseudo(rs.getString("pseudo"));
+
         return auctions;
     }
 }

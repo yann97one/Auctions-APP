@@ -13,7 +13,7 @@ public class Auctions {
     private int id_article;
     private int id_user;
     private Timestamp date;
-    private String pseudo;
+
     public Auctions(int amout, int id_article, int id_user, Timestamp date) {
         this.amount = amout;
         this.id_article = id_article;

@@ -36,7 +36,7 @@ public class UserController {
         ObjectMapper objectMapper = new ObjectMapper();
         try {
             User userData = objectMapper.readValue(json, User.class);
-            userService.CreateUser(userData);
+            userService.createUser(userData);
             return ResponseEntity.ok("User created successfully");
         } catch (JsonProcessingException e) {
             return ResponseEntity.badRequest().body("Invalid JSON format");
@@ -51,7 +51,7 @@ public class UserController {
     @DeleteMapping("/{id}")
     public ResponseEntity<String> DeleteUser(@PathVariable("id") Long id) {
         try {
-            userService.DeleteUser(id);
+            userService.deleteUser(id);
             String response = "Delete user ok";
             return ResponseEntity.ok(response);
         } catch (Exception e) {
@@ -61,7 +61,7 @@ public class UserController {
     @GetMapping("/{id}")
     public ResponseEntity<String> getUserById(@PathVariable("id") Long id) throws Exception {
         try {
-            User userData = userService.FindByIdUser(id);
+            User userData = userService.findByIdUser(id);
             ObjectMapper objectMapper = new ObjectMapper();
             String json = objectMapper.writeValueAsString(userData);
             System.out.println(json);
@@ -75,7 +75,7 @@ public class UserController {
         ObjectMapper objectMapper = new ObjectMapper();
         try {
             User userData = objectMapper.readValue(json, User.class);
-            userService.SaveUser(userData);
+            userService.saveUser(userData);
             return ResponseEntity.ok("User save successfully");
         } catch (JsonProcessingException e) {
             return ResponseEntity.badRequest().body("Invalid JSON format");

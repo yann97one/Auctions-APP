@@ -21,24 +21,24 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public void SaveUser(User user) {
+    public void saveUser(User user) {
         dao.saveUser(user);
     }
 
     @Override
-    public String CreateUser(User user) {
+    public String createUser(User user) {
         dao.create(user);
         return null;
     }
 
     @Override
-    public String DeleteUser(long id) {
+    public String deleteUser(long id) {
         dao.delete(id);
         return null;
     }
 
     @Override
-    public User FindByIdUser(long id) {
+    public User findByIdUser(long id) {
         User user = dao.getById(id);
        return user;
     }
