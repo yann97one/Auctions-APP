@@ -1,4 +1,19 @@
+import {useState} from "react";
+
 function FilterLog() {
+
+        const [checked, setDisabled] = useState(true);
+        const [checked2, setDisabled2] = useState(false);
+
+        const isCheck = () => {
+            setDisabled(false);
+            setDisabled2(true);
+        };
+
+        const isCheck2 = () => {
+            setDisabled2(false);
+            setDisabled(true);
+        };
 
     return (
 
@@ -7,7 +22,7 @@ function FilterLog() {
             <div className="flex flex-wrap -mx-3 ">
                 <div className="md:w-1/2 px-2">
                     <input
-                        defaultChecked
+                        onChange={isCheck}
                         id="default-radio-1"
                         type="radio"
                         defaultValue=""
@@ -23,8 +38,8 @@ function FilterLog() {
 
                     <div className="ml-6">
                     <div className="flex items-center my-4">
-                        <input
-                            id="default-checkbox"
+                        <input disabled={checked}
+                               id="default-checkbox"
                             type="checkbox"
                             defaultValue=""
                             className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
@@ -39,6 +54,7 @@ function FilterLog() {
                     <div className="flex items-center my-4">
                         <input
                             id="checked-checkbox"
+                            disabled={checked}
                             type="checkbox"
                             defaultValue=""
                             className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
@@ -53,6 +69,7 @@ function FilterLog() {
                     <div className="flex items-center my-4">
                         <input
                             id="checked-checkbox"
+                            disabled={checked}
                             type="checkbox"
                             defaultValue=""
                             className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
@@ -69,7 +86,9 @@ function FilterLog() {
 
                 <div className="md:w-1/2 px-2">
                     <input
+                        defaultChecked
                         id="default-radio-2"
+                        onChange={isCheck2}
                         type="radio"
                         defaultValue=""
                         name="default-radio"
@@ -85,6 +104,7 @@ function FilterLog() {
                     <div className="ml-6">
                     <div className="flex items-center my-4">
                         <input
+                            disabled={checked2}
                             id="default-checkbox"
                             type="checkbox"
                             defaultValue=""
@@ -100,6 +120,7 @@ function FilterLog() {
                     <div className="flex items-center my-4">
                         <input
                             id="checked-checkbox"
+                            disabled={checked2}
                             type="checkbox"
                             defaultValue=""
                             className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
@@ -114,6 +135,7 @@ function FilterLog() {
                     <div className="flex items-center my-4">
                         <input
                             id="checked-checkbox"
+                            disabled={checked2}
                             type="checkbox"
                             defaultValue=""
                             className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
@@ -129,8 +151,6 @@ function FilterLog() {
             </div>
         </div>
         </div>
-
-
     );
 }
 
