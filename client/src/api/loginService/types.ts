@@ -24,9 +24,8 @@ interface JwtPayload {
     pseudo: string;
     role: Role;
     tenant: string;
+    token: string;
 }
-
-
 
 
 interface User extends RegisterCredentials {

@@ -7,6 +7,6 @@ export default {
     },
 
     authUser(credentials: LoginCredentials): Promise<JwtPayload> {
-        return http.request("post", "/auth/login", credentials)
+        return http.requestAuth("post", "/auth/login", credentials)
     }
 }

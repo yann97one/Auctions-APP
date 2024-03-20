@@ -1,37 +1,41 @@
-import { createContext, ReactNode, useContext, useState } from "react";
-import { JwtPayload } from "src/api/loginService/types";
+import {createContext, ReactNode, useContext, useState} from "react";
+import {JwtPayload} from "src/api/loginService/types";
+import {getTokenFromStorage, getTokenPayload} from "@services/localStorage";
 
-interface Props{
+interface Props {
     children: ReactNode
 }
 
-interface Values{
-    user:JwtPayload | null,
-    setUser: (user:JwtPayload)=>void,
+interface Values {
+    user: JwtPayload | null,
+    setUser: (user: JwtPayload) => void,
 }
 
-const INITIAL_VALUE:Values = {
-    user:null,
-    setUser:()=>{}
+const INITIAL_VALUE: Values = {
+    user: null,
+    setUser: () => {
+    }
 }
 
 const UserContext = createContext(INITIAL_VALUE);
 
-export const UserProvider = ({children}:Props) => {
+export const UserProvider = ({children}: Props) => {
     const [user, setUser] = useState<JwtPayload | null>(null);
-    const value : Values = {user, setUser};
+    const value: Values = {user, setUser};
+    const token = getTokenFromStorage();
+    console.log(getTokenPayload(token!));
 
-    return(
+    return (
         <UserContext.Provider value={value}>
             {children}
         </UserContext.Provider>
     )
 }
 
-export function useUser(){
+export function useUser() {
     const context = useContext(UserContext);
 
-    if(!context){
+    if (!context) {
         throw new Error("useUser must be used within a UserProvider");
     }
 
