@@ -9,7 +9,7 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Repository
-public class WithdrawalDaoImpl implements WithdrawalDAO {
+public class WithdrawalDaoImpl implements WithdrawalDAO  {
 
     public final String INSERT = "INSERT INTO Withdrawal(id_article,zip,city,road) VALUES "
             + " (:id,:zip,:city,:road)";
