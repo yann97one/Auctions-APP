@@ -15,6 +15,7 @@ public class UserDto {
     private String email;
     private String pseudo;
     private String firstName;
+    private String token;
     private Role role;
 
     public static UserDto build(User user) {

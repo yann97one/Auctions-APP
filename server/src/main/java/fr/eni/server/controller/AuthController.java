@@ -34,7 +34,7 @@ public class AuthController {
 
 
     @Autowired
-    private  UserService userService;
+    private UserService userService;
 
     @Autowired
     private AuthenticationManager authenticationManager;
@@ -50,7 +50,7 @@ public class AuthController {
 //    }
 
     @PostMapping("/login")
-    public ResponseEntity<UserDto> login(@RequestBody CredentialsDTO credentialsDto)  {
+    public ResponseEntity<UserDto> login(@RequestBody CredentialsDTO credentialsDto) {
         Authentication authentication = authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(credentialsDto.getEmail(), credentialsDto.getPassword())
         );
@@ -59,25 +59,26 @@ public class AuthController {
 
         UserDetailsImpl userDetails = (UserDetailsImpl) authentication.getPrincipal();
 
-        ResponseCookie jwtCookie = jwtUtils.generateJwtCookie(userDetails);
+        String jwtCookie = jwtUtils.generateJwtCookie(userDetails);
 
         User user = userService.getByEmail(credentialsDto.getEmail());
-
-        return ResponseEntity.ok().header(HttpHeaders.SET_COOKIE,jwtCookie.toString()).body(UserDto.build(user));
+        UserDto userToReturn = UserDto.build(user);
+        userToReturn.setToken(jwtCookie);
+        return ResponseEntity.ok().body(userToReturn);
 
     }
 
     @PostMapping("/register")
-    public ResponseEntity<UserDto> register(@RequestBody SignUpDto signupDto) throws AppException{
+    public ResponseEntity<UserDto> register(@RequestBody SignUpDto signupDto) throws AppException {
 //      if(userService.verifyIfUserExist(signupDto.email()).isPresent()){
 //          throw new AppException("Email already in use",HttpStatus.BAD_REQUEST);
 //      }
         System.out.println(signupDto);
-        try{
+        try {
 
-       userService.register(signupDto);
-      return ResponseEntity.ok(UserDto.build(signupDto));
-        }catch(AppException e){
+            userService.register(signupDto);
+            return ResponseEntity.ok(UserDto.build(signupDto));
+        } catch (AppException e) {
             return ResponseEntity.badRequest().build();
         }
     }
