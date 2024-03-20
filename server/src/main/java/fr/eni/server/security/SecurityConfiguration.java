@@ -23,7 +23,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import org.springframework.web.servlet.resource.PathResourceResolver;
 
 @Configuration
-@EnableWebMvc
+//@EnableWebMvc
 @EnableWebSecurity
 @EnableMethodSecurity(prePostEnabled = true)
 public class SecurityConfiguration implements WebMvcConfigurer {
@@ -33,7 +33,6 @@ public class SecurityConfiguration implements WebMvcConfigurer {
 
     @Autowired
     private UserAuthenticationEntryPoint unauthorizedHandler;
-
 
 
     @Bean
@@ -69,18 +68,16 @@ public class SecurityConfiguration implements WebMvcConfigurer {
     }
 
 
-
-
-
     @Bean
-    public SecurityFilterChain filterChain( HttpSecurity http) throws Exception {
+    public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http.csrf(csrf -> csrf.disable())
                 .exceptionHandling(exception -> exception.authenticationEntryPoint(unauthorizedHandler))
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
-                .authorizeHttpRequests(authorize -> authorize.requestMatchers("/api/**").permitAll()
-                        .anyRequest().permitAll());
-        http.authenticationProvider(authenticationProvider());
+                .authorizeHttpRequests(authorize -> authorize.requestMatchers("/api/auth/**").permitAll()
+                        .anyRequest().authenticated());
         http.addFilterBefore(authenticationJwtTokenFilter(), UsernamePasswordAuthenticationFilter.class);
+        http.authenticationProvider(authenticationProvider());
+
         return http.build();
     }
 

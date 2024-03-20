@@ -17,11 +17,11 @@ public class UserController {
 
 
     @GetMapping("/detail/{id}")
-    public ResponseEntity<User> getUserDetail(@PathVariable(name="id") long id) {
-        try{
+    public ResponseEntity<User> getUserDetail(@PathVariable(name = "id") long id) {
+        try {
 
-        return ResponseEntity.ok(userService.getOne(id));
-        }catch(EmptyResultDataAccessException e){
+            return ResponseEntity.ok(userService.getOne(id));
+        } catch (EmptyResultDataAccessException e) {
             return ResponseEntity.notFound().build();
         }
     }

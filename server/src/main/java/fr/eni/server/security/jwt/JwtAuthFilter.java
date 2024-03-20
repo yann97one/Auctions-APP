@@ -37,6 +37,7 @@ public class JwtAuthFilter extends OncePerRequestFilter {
             String jwt = parseJwt(request);
             if (jwt != null && jwtUtils.validateJwtToken(jwt)) {
                 String email = jwtUtils.getEmailFromJwtToken(jwt);
+                System.out.println("email: " + email);
 
                 UserDetails userDetails = userDetailServiceImpl.loadUserByUsername(email);
 
@@ -56,6 +57,7 @@ public class JwtAuthFilter extends OncePerRequestFilter {
 
     private String parseJwt(HttpServletRequest request) {
         String jwt = jwtUtils.getJwtFromCookies(request);
-        return jwt;
+        System.out.println(jwt);
+        return jwtUtils.getJwtFromCookies(request);
     }
 }

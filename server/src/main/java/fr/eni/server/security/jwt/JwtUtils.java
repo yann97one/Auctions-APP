@@ -29,9 +29,15 @@ public class JwtUtils {
     private UserService userService;
 
     public String getJwtFromCookies(HttpServletRequest request) {
-        Cookie cookie = WebUtils.getCookie(request, jwtCookie);
-        if (cookie != null) {
-            return cookie.getValue();
+//        Cookie cookie = WebUtils.getCookie(request, jwtCookie);
+//        if (cookie != null) {
+//            return cookie.getValue();
+//        } else {
+//            return null;
+//        }
+        String authorizationHeader = request.getHeader("Authorization");
+        if (authorizationHeader != null && authorizationHeader.startsWith("Bearer ")) {
+            return authorizationHeader.substring(7);
         } else {
             return null;
         }
@@ -39,9 +45,7 @@ public class JwtUtils {
 
     public String generateJwtCookie(UserDetailsImpl userPrincipal) {
         return generateTokenFromEmail(userPrincipal.getUsername());
-//        ResponseCookie cookie = ResponseCookie.from(jwtCookie, jwt).path("/api").maxAge(24 * 60 * 60).httpOnly(true)
-//                .build();
-//        return cookie;
+
     }
 
     public ResponseCookie getCleanJwtCookie() {
