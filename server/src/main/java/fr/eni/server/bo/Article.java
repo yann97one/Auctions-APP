@@ -16,12 +16,13 @@ public class Article {
     private String description;
     private LocalDate beginDate;
     private LocalDate endDate;
+    private String image;
     private int initialPrice;
     private int sellPrice;
     private int userId;
     private int idCategory;
 
-    public Article(String name, String description, LocalDate beginDate, LocalDate endDate, int initialPrice, int sellPrice, int userId, int idCategory) {
+    public Article(String name, String description,LocalDate beginDate, LocalDate endDate, int initialPrice, int sellPrice, int userId, int idCategory) {
         this.name = name;
         this.description = description;
         this.beginDate = beginDate;

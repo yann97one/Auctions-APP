@@ -20,10 +20,13 @@ interface RegisterCredentials extends LoginCredentials {
 interface JwtPayload {
     id: string;
     email: string;
+    firstName: string;
     pseudo: string;
     role: Role;
     tenant: string;
 }
+
+
 
 
 interface User extends RegisterCredentials {

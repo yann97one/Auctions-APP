@@ -1,30 +1,19 @@
-import {Suspense, useEffect} from "react";
+import { Suspense } from "react";
 import AppRoutes from "./router/AppRoutes";
 import NavBar from "./components/shared/NavBar";
-import {useAppSelector} from "./store/hooks";
+import Loader from "./components/shared/Loader";
 
 function App() {
-    const currentUser = useAppSelector(state => state.user);
-    const extraMenuItems: NavBarItem[] = []
+  const extraMenuItems: NavBarItem[] = [];
 
-    useEffect(() => {
-        console.log(currentUser)
-
-        extraMenuItems.push({
-            href: '/profile',
-            itemLabel: `Mon profil : ${currentUser.email}`,
-        })
-
-    }, [currentUser])
-
-    return (
-        <>
-            <NavBar extraItems={extraMenuItems}/>
-            <Suspense fallback={<div>Loading...</div>}>
-                <AppRoutes/>
-            </Suspense>
-        </>
-    )
+  return (
+    <>
+      <NavBar extraItems={extraMenuItems} />
+      <Suspense fallback={<Loader />}>
+        <AppRoutes />
+      </Suspense>
+    </>
+  );
 }
 
-export default App
+export default App;

@@ -2,6 +2,7 @@ package fr.eni.server.dal;
 
 import fr.eni.server.bo.Auction;
 import fr.eni.server.dal.rowMapper.AuctionRowMapper;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
@@ -18,17 +19,17 @@ public class AuctionDaoImpl implements AuctionDAO{
     private final String FIND_BY_ID = "SELECT * FROM Auctions where id_auctions=:id_auctions";
     private final String DELETE = "DELETE FROM Auctions where id_auctions= :id_auctions;";
 
+    @Autowired
     private NamedParameterJdbcTemplate jdbcTemplate;
 
-    public AuctionDaoImpl(JdbcTemplate jdbcTemplate) {
-        this.jdbcTemplate = new NamedParameterJdbcTemplate(jdbcTemplate);
-    }
+
+
     @Override
     public void create(Auction auctions) {
         MapSqlParameterSource namedParameters = new MapSqlParameterSource();
         namedParameters.addValue("amount",auctions.getAmount());
-        namedParameters.addValue("id_article",auctions.getId_article());
-        namedParameters.addValue("id_user",auctions.getId_user());
+        namedParameters.addValue("id_article",auctions.getIdArticle());
+        namedParameters.addValue("id_user",auctions.getIdUser());
         namedParameters.addValue("date",auctions.getDate());
         jdbcTemplate.update(INSERT, namedParameters);
     }

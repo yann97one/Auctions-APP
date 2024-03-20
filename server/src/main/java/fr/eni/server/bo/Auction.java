@@ -13,14 +13,14 @@ import java.time.LocalDate;
 public class Auction implements Serializable {
     private long id;
     private int amount;
-    private int id_article;
-    private int id_user;
+    private int idArticle;
+    private long idUser;
     private LocalDate date;
 
     public Auction(int amout, int id_article, int id_user, LocalDate date) {
         this.amount = amout;
-        this.id_article = id_article;
-        this.id_user = id_user;
+        this.idArticle = id_article;
+        this.idUser = id_user;
         this.date = date;
     }
 }

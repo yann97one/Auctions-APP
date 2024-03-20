@@ -2,6 +2,7 @@ import {useEffect, useState} from 'react';
 import logo from '../../assets/eni-logo.png';
 import {JwtPayload} from "../../api/loginService/types";
 import {getTokenFromStorage, getTokenPayload} from "../../services/localStorage";
+import { useUser } from 'src/hooks/UserContext';
 
 interface Props {
     extraItems?: NavBarItem[];
@@ -9,6 +10,8 @@ interface Props {
 
 function NavBar(props: Props) {
     const {extraItems} = props;
+    // const {user} = useUser();
+
     const [isMenuOpen, setIsMenuOpen] = useState(false);
     const [token, setToken] = useState<JwtPayload | undefined>(undefined);
 
@@ -55,7 +58,7 @@ function NavBar(props: Props) {
             menuItems.push(...extraItems);
         }
 
-        manageToken();
+        //manageToken();
     }, [extraItems, token]);
 
     return (

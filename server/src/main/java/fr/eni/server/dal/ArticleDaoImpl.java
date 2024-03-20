@@ -13,8 +13,8 @@ import java.util.List;
 public class ArticleDaoImpl implements ArticleDao{
 
 
-    public final String INSERT = "INSERT INTO Selled_Articles(article_name,description,auction_begin_date,auction_end_date,initial_price,sell_price,user_id,category_id) VALUES "
-            + " (:name, :description, :beginDate, :endDate,:initialPrice,:sellPrice,:userId,:idCategory)";
+    public final String INSERT = "INSERT INTO Selled_Articles(article_name,description,auction_begin_date,auction_end_date,initial_price,sell_price,user_id,category_id,image) VALUES "
+            + " (:name, :description, :beginDate, :endDate,:initialPrice,:sellPrice,:userId,:idCategory,:image)";
     private final String FIND_ALL = "SELECT * FROM Selled_Articles ";
 
     private final String FIND_BY_ID = "SELECT * FROM Selled_Articles where id_article=:id_article";
@@ -42,6 +42,7 @@ public class ArticleDaoImpl implements ArticleDao{
         namedParameters.addValue("sellPrice",article.getSellPrice());
         namedParameters.addValue("userId",article.getUserId());
         namedParameters.addValue("idCategory",article.getIdCategory());
+        namedParameters.addValue("image",article.getImage());
         jdbcTemplate.update(INSERT, namedParameters);
     }
 

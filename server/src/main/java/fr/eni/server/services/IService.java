@@ -1,5 +1,7 @@
 package fr.eni.server.services;
 
+import java.util.List;
+
 public interface IService<T> {
     void createNew(T obj);
 
@@ -7,5 +9,6 @@ public interface IService<T> {
 
     T getOne(long Id);
 
+    List<T> getAll();
 
 }

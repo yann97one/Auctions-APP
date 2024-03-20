@@ -26,4 +26,13 @@ public class UserDto {
         dto.setRole(user.getRole());
         return dto;
     }
+
+    public static UserDto build(SignUpDto signUpDto) {
+        UserDto dto = new UserDto();
+        dto.setEmail(signUpDto.email());
+        dto.setPseudo(signUpDto.pseudo());
+        dto.setFirstName(signUpDto.firstName());
+        dto.setRole(Role.USER);
+        return dto;
+    }
 }

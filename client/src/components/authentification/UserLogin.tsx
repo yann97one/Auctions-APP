@@ -4,8 +4,8 @@ import {LoginCredentials} from "../../api/loginService/types";
 import {useState} from "react";
 import {apiClient} from "../../api";
 import {useNavigate} from "react-router-dom";
-import {useAppDispatch} from "../../store/hooks";
-import {login} from "../../store/reducers/user";
+import { useUser } from "../../hooks/UserContext";
+
 
 const INITIAL_STATE: LoginCredentials = {
     email: "",
@@ -14,7 +14,8 @@ const INITIAL_STATE: LoginCredentials = {
 }
 
 function UserLogin() {
-    const dispatch = useAppDispatch();
+    const {setUser} = useUser();
+
     const navigate = useNavigate();
     const [credentials, setCredentials] = useState(INITIAL_STATE);
 
@@ -22,8 +23,7 @@ function UserLogin() {
         event.preventDefault()
         try {
             const user = await apiClient.auth.authUser(credentials)
-            dispatch(login(user))
-            localStorage.setItem("auth_token", user.token);
+            setUser(user)
             navigate("/")
         } catch (error) {
             console.log(error)

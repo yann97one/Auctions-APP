@@ -14,6 +14,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 @RequiredArgsConstructor
@@ -42,6 +43,11 @@ public class UserService implements IUserService {
         return userDao.getById(id);
     }
 
+    @Override
+    public List getAll() {
+        return null;
+    }
+
 
     @Override
     public UserDto register(SignUpDto userDto) {
@@ -61,6 +67,11 @@ public class UserService implements IUserService {
     @Override
     public User getByEmail(String email) {
         return userDao.findByEmail(email);
+    }
+
+    @Override
+    public Optional<User> verifyIfUserExist(String email) {
+        return Optional.ofNullable(userDao.findByEmail(email));
     }
 
 

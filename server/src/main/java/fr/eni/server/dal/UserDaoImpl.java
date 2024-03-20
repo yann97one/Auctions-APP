@@ -6,6 +6,7 @@ import fr.eni.server.dto.UserDto;
 import fr.eni.server.mapper.UserMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
@@ -73,17 +74,27 @@ public class UserDaoImpl implements UserDao {
 
     @Override
     public User findByLogin(String email, String password) {
+        try{
+
         MapSqlParameterSource namedParameters = new MapSqlParameterSource();
         namedParameters.addValue("email", email);
-        //namedParameters.addValue("password", password);
+        namedParameters.addValue("password", password);
         return jdbcTemplate.queryForObject(FIND_BY_LOGIN, namedParameters, new UserRowMapper());
+        }catch(EmptyResultDataAccessException e){
+            return null;
+        }
 
     }
 
     @Override
     public User findByEmail(String email) {
+        try{
         MapSqlParameterSource namedParameters = new MapSqlParameterSource();
         namedParameters.addValue("email", email);
         return jdbcTemplate.queryForObject(FIND_BY_EMAIL, namedParameters, new UserRowMapper());
+
+        }catch (EmptyResultDataAccessException e){
+            return null;
+        }
     }
 }

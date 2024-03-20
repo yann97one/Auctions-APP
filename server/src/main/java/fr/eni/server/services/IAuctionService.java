@@ -1,4 +1,6 @@
 package fr.eni.server.services;
 
-public interface IAuctionService {
+import fr.eni.server.bo.Auction;
+
+public interface IAuctionService extends IService<Auction>{
 }

@@ -13,12 +13,13 @@ public class ArticleRowMapper implements RowMapper<Article> {
         article.setId(rs.getLong("id_article"));
         article.setName(rs.getString("article_name"));
         article.setDescription(rs.getString("description"));
-        article.setBeginDate(rs.getDate("auction_begin_date").toLocalDate());
-        article.setEndDate(rs.getDate("auction_end_date").toLocalDate());
+        article.setBeginDate(rs.getDate("auctions_begin_date").toLocalDate());
+        article.setEndDate(rs.getDate("auctions_end_date").toLocalDate());
         article.setInitialPrice(rs.getInt("initial_price"));
         article.setSellPrice(rs.getInt("sell_price"));
         article.setUserId(rs.getInt("user_id"));
         article.setIdCategory(rs.getInt("category_id"));
+        article.setImage(rs.getString("image"));
         return article;
     }
 }

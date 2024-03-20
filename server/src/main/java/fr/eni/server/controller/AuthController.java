@@ -2,9 +2,12 @@ package fr.eni.server.controller;
 
 import fr.eni.server.bo.Role;
 import fr.eni.server.bo.User;
+import fr.eni.server.exceptions.AppException;
 import fr.eni.server.security.jwt.JwtUtils;
 import fr.eni.server.security.services.UserDetailsImpl;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseCookie;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -25,7 +28,6 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @CrossOrigin("*")
-
 @RestController
 @RequestMapping("/api/auth")
 public class AuthController {
@@ -48,7 +50,7 @@ public class AuthController {
 //    }
 
     @PostMapping("/login")
-    public ResponseEntity<UserDto> login(@RequestBody CredentialsDTO credentialsDto) {
+    public ResponseEntity<UserDto> login(@RequestBody CredentialsDTO credentialsDto)  {
         Authentication authentication = authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(credentialsDto.getEmail(), credentialsDto.getPassword())
         );
@@ -61,19 +63,24 @@ public class AuthController {
 
         User user = userService.getByEmail(credentialsDto.getEmail());
 
-        return ResponseEntity.ok(UserDto.build(user));
+        return ResponseEntity.ok().header(HttpHeaders.SET_COOKIE,jwtCookie.toString()).body(UserDto.build(user));
 
     }
 
-//    @PostMapping("/register")
-//    public ResponseEntity<UserDto> register(@RequestBody SignUpDto signupDto) {
-//        System.out.println(signupDto);
-//        UserDto createdUser = userService.register(signupDto);
-//        createdUser.setToken(userAuthProvider.createToken(createdUser));
-//
-//        return ResponseEntity.created(URI.create("/users/" + createdUser.getId())).body(createdUser);
-//
-//    }
+    @PostMapping("/register")
+    public ResponseEntity<UserDto> register(@RequestBody SignUpDto signupDto) throws AppException{
+//      if(userService.verifyIfUserExist(signupDto.email()).isPresent()){
+//          throw new AppException("Email already in use",HttpStatus.BAD_REQUEST);
+//      }
+        System.out.println(signupDto);
+        try{
+
+       userService.register(signupDto);
+      return ResponseEntity.ok(UserDto.build(signupDto));
+        }catch(AppException e){
+            return ResponseEntity.badRequest().build();
+        }
+    }
 
     @GetMapping("/detail")
     public ResponseEntity<User> getUserDetail() {
