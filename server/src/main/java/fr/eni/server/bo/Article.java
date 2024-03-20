@@ -22,7 +22,7 @@ public class Article {
     private int userId;
     private int idCategory;
 
-    public Article(String name, String description,LocalDate beginDate, LocalDate endDate, int initialPrice, int sellPrice, int userId, int idCategory) {
+    public Article(String name, String description, LocalDate beginDate, LocalDate endDate, int initialPrice, int sellPrice, int userId, int idCategory) {
         this.name = name;
         this.description = description;
         this.beginDate = beginDate;
@@ -32,4 +32,6 @@ public class Article {
         this.userId = userId;
         this.idCategory = idCategory;
     }
+
+
 }

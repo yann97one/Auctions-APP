@@ -32,7 +32,7 @@ function AuctionsList() {
                             }
                             title={auction.title}
                             price={auction.article.initialPrice}
-                            seller={auction.sellerEmail}
+                            seller={auction.sellerPseudo}
                             endDate={new Date()}
                         />
                     ))
