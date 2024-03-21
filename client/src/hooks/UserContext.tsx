@@ -23,11 +23,7 @@ export const UserProvider = ({children}: Props) => {
     const [user, setUser] = useState<JwtPayload | null>(null);
     const value: Values = {user, setUser};
     const token = getTokenFromStorage();
-    if (typeof token === 'string') {
-        console.log(getTokenPayload(token));
-    } else {
-        console.error('Token is not a string');
-    }
+    console.log(getTokenPayload(token!));
 
     return (
         <UserContext.Provider value={value}>
