@@ -73,7 +73,7 @@ public class SecurityConfiguration implements WebMvcConfigurer {
         http.csrf(csrf -> csrf.disable())
                 .exceptionHandling(exception -> exception.authenticationEntryPoint(unauthorizedHandler))
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
-                .authorizeHttpRequests(authorize -> authorize.requestMatchers("/api/auth/**").permitAll()
+                .authorizeHttpRequests(authorize -> authorize.requestMatchers("/api/auth/**","/api-docs/**","/error","/swagger-ui/**").permitAll()
                         .anyRequest().authenticated());
         http.addFilterBefore(authenticationJwtTokenFilter(), UsernamePasswordAuthenticationFilter.class);
         http.authenticationProvider(authenticationProvider());
