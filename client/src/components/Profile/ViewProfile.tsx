@@ -86,40 +86,40 @@ function ViewProfile() {
               className="w-full bg-white rounded-lg shadow dark:border md:mt-0 sm:max-w-md xl:p-0 dark:bg-gray-800 dark:border-gray-700">
             <div className="p-6 space-y-4 md:space-y-6 sm:p-8">
               {FORM_FIELDS.map((field, index) => (
-              <div key={index} className="flex flex-wrap -mx-3 mb-5">
-                <div className="md:w-1/2 px-2">
-                  <label htmlFor={field.label}
-                         className={`block mb-2 text-sm font-medium  dark:text-white ${ errors?.[field.name] ? "text-red-500" : "text-gray-900" }`}>
-                    {field.label}</label>
-                </div>
-                <div className="md:w-1/2 px-2">
-                  <input type="text"
-                         id={field.label}
-                         {...register(field.name)}
-                         value={user?.[field.id]}
-                         onChange={(event) =>
-                             setUser({ ...user, [field.id]: event.target.value })
-                         }
-                         disabled={!isEditable}
-                         className={`block mb-2 text-sm font-medium  dark:text-white ${ errors?.[field.name] ? "text-red-500" : "text-gray-900" }`}>
-                    </input>
-                  {errors?.[field.name] &&
-                      <p className="text-red-500 text-sm mt-2">
-                        {errors?.[field.name].message}
-                      </p>
-                  }
-                </div>
-              </div>
+                  <div key={index} className="flex flex-wrap -mx-3 mb-5">
+                    <div className="md:w-1/2 px-2">
+                      <label htmlFor={field.label}
+                             className={`block mb-2 text-sm font-medium  dark:text-white ${errors?.[field.name] ? "text-red-500" : "text-gray-900"}`}>
+                        {field.label}</label>
+                    </div>
+                    <div className="md:w-1/2 px-2">
+                      <input type="text"
+                             id={field.label}
+                             {...register(field.name)}
+                             value={user?.[field.id]}
+                             onChange={(event) =>
+                                 setUser({...user, [field.id]: event.target.value})
+                             }
+                             disabled={!isEditable}
+                             className={`block mb-2 text-sm font-medium  dark:text-white ${errors?.[field.name] ? "text-red-500" : "text-gray-900"}`}>
+                      </input>
+                      {errors?.[field.name] &&
+                          <p className="text-red-500 text-sm mt-2">
+                            {errors?.[field.name].message}
+                          </p>
+                      }
+                    </div>
+                  </div>
               ))}
-          <button onClick={updateUser}
-                  className="text-white mt-6 bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
-                  {isEditable ? "Valider" : "Modifier"}
-          </button>
+              <button onClick={updateUser}
+                      className="text-white mt-6 bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+                {isEditable ? "Valider" : "Modifier"}
+              </button>
             </div>
+          </div>
         </div>
-    </div>
 
-    </div>
+      </div>
   );
 }
 
