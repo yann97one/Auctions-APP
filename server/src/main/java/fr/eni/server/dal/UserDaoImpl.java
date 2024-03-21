@@ -66,6 +66,11 @@ public class UserDaoImpl implements UserDao {
     }
 
     @Override
+    public void update(User obj) {
+
+    }
+
+    @Override
     public User getById(long userId) {
         MapSqlParameterSource namedParameters = new MapSqlParameterSource();
         namedParameters.addValue("id_user", userId);

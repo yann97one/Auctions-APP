@@ -19,6 +19,8 @@ public class AuctionDaoImpl implements AuctionDAO{
     private final String FIND_BY_ID = "SELECT * FROM Auctions where id_auctions=:id_auctions";
     private final String DELETE = "DELETE FROM Auctions where id_auctions= :id_auctions;";
 
+    private final String UPDATE = "UPDATE Auctions SET auctions_amount=:amount, auctions_date=:date, id_article=:id_article, id_user=:id_user WHERE id_auctions=:id_auctions";
+
     @Autowired
     private NamedParameterJdbcTemplate jdbcTemplate;
 
@@ -46,6 +48,17 @@ public class AuctionDaoImpl implements AuctionDAO{
     @Override
     public List<Auction> getAll() {
         return jdbcTemplate.query(FIND_ALL, new AuctionRowMapper());
+    }
+
+    @Override
+    public void update(Auction obj) {
+        MapSqlParameterSource namedParameters = new MapSqlParameterSource();
+        namedParameters.addValue("amount",obj.getAmount());
+        namedParameters.addValue("id_article",obj.getIdArticle());
+        namedParameters.addValue("id_user",obj.getIdUser());
+        namedParameters.addValue("date",obj.getDate());
+        namedParameters.addValue("id_auctions",obj.getId());
+        jdbcTemplate.update(UPDATE, namedParameters);
     }
 
     @Override

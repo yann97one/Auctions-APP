@@ -33,5 +33,9 @@ public class Article {
         this.idCategory = idCategory;
     }
 
+    public boolean isAuctionOver() {
+        return LocalDate.now().isAfter(this.endDate);
+    }
+
 
 }

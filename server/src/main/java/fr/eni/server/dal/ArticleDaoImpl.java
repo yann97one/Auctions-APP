@@ -61,6 +61,11 @@ public class ArticleDaoImpl implements ArticleDao{
     }
 
     @Override
+    public void update(Article obj) {
+
+    }
+
+    @Override
     public Article getById(long articleId) {
         MapSqlParameterSource namedParameters = new MapSqlParameterSource();
         namedParameters.addValue("id_article",articleId);

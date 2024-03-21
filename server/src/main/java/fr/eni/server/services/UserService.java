@@ -44,6 +44,11 @@ public class UserService implements IUserService {
     }
 
     @Override
+    public void update(Object obj) {
+
+    }
+
+    @Override
     public List getAll() {
         return null;
     }

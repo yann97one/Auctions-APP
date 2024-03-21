@@ -29,6 +29,11 @@ public class ArticleServiceImpl implements IArticleService{
     }
 
     @Override
+    public void update(Article article) {
+        articleDao.update(article);
+    }
+
+    @Override
     public List<Article> getAll() {
         return articleDao.getAll();
     }

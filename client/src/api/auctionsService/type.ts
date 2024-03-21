@@ -1,29 +1,30 @@
 interface Auction {
-    id: number;
-    title: string;
-    amount: number;
-    sellerPseudo: string;
-    article: Article;
+  id: string;
+  amount: number;
+  date: Date;
+  sellerPseudo: string;
+  article: Article;
 }
 
 interface AuctionCreation {
-    title: string;
-    amount: number;
-    sellerPseudo: string;
-    article: Article;
+  title: string;
+  amount: number;
+  sellerPseudo: string;
 }
 
-interface Article {
-    id: number;
-    name: string;
-    description: string;
-    beginDate: Date;
-    endDate: Date;
-    image: string | null;
-    initialPrice: number;
-    sellPrice: number;
-    userId: number;
-    idCategory: number;
+interface ArticleCreation {
+  name: string;
+  description: string;
+  beginDate: Date;
+  endDate: Date;
+  image: string | null;
+  initialPrice: number;
+  sellPrice: number;
+  userId: string;
+  idCategory: string;
+}
+interface Article extends ArticleCreation {
+  id: number;
 }
 
-export type {Auction, Article, AuctionCreation};
+export type { Auction, Article, AuctionCreation, ArticleCreation };

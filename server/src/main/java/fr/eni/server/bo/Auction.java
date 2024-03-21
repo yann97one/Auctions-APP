@@ -1,5 +1,6 @@
 package fr.eni.server.bo;
 
+import fr.eni.server.dto.AuctionDto;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -13,7 +14,7 @@ import java.time.LocalDate;
 public class Auction implements Serializable {
     private long id;
     private int amount;
-    private int idArticle;
+    private long idArticle;
     private long idUser;
     private LocalDate date;
 
@@ -23,4 +24,6 @@ public class Auction implements Serializable {
         this.idUser = id_user;
         this.date = date;
     }
+
+
 }

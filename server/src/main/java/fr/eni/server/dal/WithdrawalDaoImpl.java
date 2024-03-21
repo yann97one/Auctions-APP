@@ -45,6 +45,11 @@ public class WithdrawalDaoImpl implements WithdrawalDao{
     }
 
     @Override
+    public void update(Withdrawal obj) {
+        
+    }
+
+    @Override
     public Withdrawal getById(long id) {
         MapSqlParameterSource namedParameters = new MapSqlParameterSource();
         namedParameters.addValue("id_article",id);
