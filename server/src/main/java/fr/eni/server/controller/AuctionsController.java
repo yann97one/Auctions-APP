@@ -4,6 +4,7 @@ import fr.eni.server.bo.Article;
 import fr.eni.server.bo.Auction;
 import fr.eni.server.bo.User;
 import fr.eni.server.dto.AuctionDto;
+import fr.eni.server.security.services.UserDetailsImpl;
 import fr.eni.server.services.ArticleServiceImpl;
 import fr.eni.server.services.AuctionServiceImpl;
 import fr.eni.server.services.UserService;
@@ -59,7 +60,7 @@ public class AuctionsController {
     public ResponseEntity<AuctionDto> getSingleAuction(@PathVariable(value = "id") long id) {
         try {
             AuctionDto auction = AuctionDto.build(auctionService.getOne(id));
-           Article article =  articleService.getOne(auction.getId());
+            Article article = articleService.getOne(auction.getId());
             auction.setArticle(article);
             auction.setOver(article.isAuctionOver());
             return ResponseEntity.ok(auction);
@@ -71,14 +72,22 @@ public class AuctionsController {
     }
 
     @PostMapping("/add")
-    public ResponseEntity<AuctionDto> addAuction(@RequestBody AuctionDto auctionDto,Authentication auth) {
+    public ResponseEntity<AuctionDto> addAuction(@RequestBody AuctionDto auctionDto, Authentication auth) {
+        Article article = auctionDto.getArticle();
+        articleService.createNew(article);
 
         Auction auction = new Auction();
         auction.setAmount(auctionDto.getAmount());
         auction.setIdArticle(auctionDto.getArticle().getId());
+        auction.setDate(auctionDto.getDate());
 
-        User user = userService.getByEmail(auth.getPrincipal().toString());
-        auction.setIdUser(user.getId());
+        UserDetailsImpl userDetails = (UserDetailsImpl) auth.getPrincipal();
+
+        auction.setIdUser(userDetails.getId());
+        System.out.println(auth.getPrincipal());
+        System.out.println(auction);
+        auctionService.createNew(auction);
+
         return ResponseEntity.created(URI.create("/api/auctions/" + auction.getId())).body(AuctionDto.build(auction));
     }
 

@@ -1,7 +1,8 @@
 import Datepicker from "tailwind-datepicker-react"
 import {useState} from "react";
+import {IOptions} from "tailwind-datepicker-react/types/Options";
 
-const options = {
+const options: IOptions = {
     autoHide: true,
     todayBtn: true,
     clearBtn: true,
@@ -20,12 +21,11 @@ const options = {
         selected: "bg-primary-600 text-white hover:bg-primary-700",
     },
     icons: {
-        // () => ReactElement | JSX.Element
         prev: () => <span>Previous</span>,
         next: () => <span>Next</span>,
     },
     datepickerClassNames: "top-12",
-    defaultDate: false,
+    defaultDate: new Date(),
     language: "eng",
     weekDays: ["Mo", "Tu", "We", "Th", "Fr", "Sa", "Su"],
     inputNameProp: "date",
@@ -38,11 +38,24 @@ const options = {
     }
 }
 
-function DatePicker() {
+interface Props {
+    setArticleBeginDate?: (articleBeginDate: Date) => void
+    setArticleEndDate?: (articleEndDate: Date) => void
+}
+
+function DatePicker(props: Props) {
     const [show, setShow] = useState(false)
+    const {setArticleBeginDate, setArticleEndDate,} = props
     const [selectedDate, setSelectedDate] = useState<Date | string>("")
+
     const handleChange = (selectedDate: Date) => {
         setSelectedDate(selectedDate.toLocaleDateString("fr"))
+
+        if (setArticleBeginDate) {
+            setArticleBeginDate(selectedDate)
+        } else if (setArticleEndDate) {
+            setArticleEndDate(selectedDate)
+        }
     }
     const handleClose = (state: boolean) => {
         setShow(state)
@@ -65,9 +78,11 @@ function DatePicker() {
             <Datepicker options={options} onChange={handleChange} show={show} setShow={handleClose}>
                 <input type="text"
                        className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full ps-10 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                       placeholder="Choisir une date" value={selectedDate} onFocus={() => setShow(true)} readOnly/>
+                       placeholder="Choisir une date" value={selectedDate.toString()} onFocus={() => setShow(true)}
+                       readOnly/>
             </Datepicker>
         </div>
     )
 }
+
 export default DatePicker;

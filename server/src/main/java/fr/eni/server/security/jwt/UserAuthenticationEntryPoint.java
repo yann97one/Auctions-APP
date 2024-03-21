@@ -26,6 +26,7 @@ public class UserAuthenticationEntryPoint implements AuthenticationEntryPoint {
     @Override
     public void commence(HttpServletRequest request, HttpServletResponse response, AuthenticationException authException)
             throws IOException, ServletException {
+        System.out.println(response.toString());
         logger.error("Unauthorized error: {}", authException.getMessage());
         authException.getStackTrace();
         authException.getCause();

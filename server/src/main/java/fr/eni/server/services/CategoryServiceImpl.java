@@ -1,36 +1,38 @@
 package fr.eni.server.services;
 
 import fr.eni.server.bo.Category;
+import fr.eni.server.dal.CategoryDaoImpl;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
-public class CategoryServiceImpl implements ICategoryService{
+public class CategoryServiceImpl implements ICategoryService {
 
+    private CategoryDaoImpl categoryDao;
 
     @Override
-    public void createNew(Category obj) {
-
+    public void createNew(Category category) {
+        categoryDao.create(category);
     }
 
     @Override
     public void deleteOne(long id) {
-
+        categoryDao.delete(id);
     }
 
     @Override
     public Category getOne(long Id) {
-        return null;
+        return categoryDao.getById(Id);
     }
 
     @Override
     public void update(Category obj) {
-
+        categoryDao.update(obj);
     }
 
     @Override
     public List<Category> getAll() {
-        return null;
+        return categoryDao.getAll();
     }
 }
