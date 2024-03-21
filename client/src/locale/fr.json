@@ -1,15 +1,6 @@
 {
 
-  "login": {
-    "title": "Connexion",
-    "email": "Adresse e-mail",
-    "password": "Mot de passe",
-    "rememberMe": "Se souvenir de moi",
-    "forgotPassword": "Mot de passe oublié?",
-    "signIn": "Connexion",
-    "noAccount": "Vous n'avez pas de compte?",
-    "signUp": "S'inscrire"
-  },
+
   "register": {
     "title": "Inscription",
     "name": "Nom",
@@ -18,7 +9,16 @@
     "confirmPassword": "Confirmer le mot de passe",
     "signUp": "S'inscrire",
     "alreadyHaveAccount": "Vous avez déjà un compte?",
-    "signIn": "Connexion"
+    "signIn": "Connexion",
+    "firstname": "Prenom",
+    "name": "Nom",
+    "pseudo": "Pseudo",
+    "city": "Ville",
+    "road": "Rue",
+    "zip": "Code postale",
+    "phone": "Téléphone",
+    "create": "Créer",
+    "cancel": "Annuler"
   },
   "sell": {
     "notStarted": "Ventes non débutées",
@@ -38,10 +38,28 @@
     "searchButton": "Rechercher",
     "category": "Categories",
     "selected": "{count, plural, =0 {No selected} one {# selected} other {# selected}}",
-    "reset": "Reset",
+    "reset": "Annuler",
     "it": "Informatique",
     "furniture": "Ameublement",
     "clothing": "Vêtement",
-    "hobby": "Sports et loisirs"
+    "hobby": "Sports et loisirs",
+    "searchPlaceHolder": "Rechercher un produit..."
+  },
+  "login": {
+    "title": "Connexion",
+    "email": "Adresse e-mail",
+    "password": "Mot de passe",
+    "rememberMe": "Se souvenir de moi",
+    "forgotPassword": "Mot de passe oublié?",
+    "signIn": "Connexion",
+    "noAccount": "Vous n'avez pas de compte?",
+    "signUp": "S'inscrire",
+    "connexion":"Se connecter / S'inscrire"
+  },
+  "auction": {
+    "articleName": "Article :",
+    "price": "Prix :",
+    "endAuction": "Date de fin :",
+    "seller": "Vendeur :"
   }
 }

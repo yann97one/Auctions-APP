@@ -1,6 +1,7 @@
+import {useTranslation} from "react-i18next";
 
 function AuctionCard() {
-
+    const { t } = useTranslation();
     return (
         <>
         <a href="#" className="group relative block max-w-xs mx-3 my-3 overflow-hidden">
@@ -14,11 +15,11 @@ function AuctionCard() {
       {" "}
         New{" "}
     </span>
-                <h3 className="mt-4 text-lg font-medium text-gray-900">Fauteuil</h3>
-                <p className="mt-1.5 text-sm text-gray-700">$14.99</p>
-                <p className="mt-1.5 text-sm text-gray-700">Fin de l'enchère : 01/01/2000</p>
+                <h3 className="mt-4 text-lg font-medium text-gray-900">{t("auction.articleName")} Fauteuil</h3>
+                <p className="mt-1.5 text-sm text-gray-700">{t("auction.price")} $14.99</p>
+                <p className="mt-1.5 text-sm text-gray-700">{t("auction.endAuction")} 01/01/2000</p>
                 <br/>
-                <p className="mt-1.5 text-sm text-gray-700">Vendeur : {" "}
+                <p className="mt-1.5 text-sm text-gray-700">{t("auction.seller")} {" "}
                     <a
                         href="/bbb"
                         className="font-medium text-primary-600 hover:underline dark:text-primary-500"

@@ -1,14 +1,5 @@
 {
-  "login": {
-    "title": "Login",
-    "email": "Email address",
-    "password": "Password",
-    "rememberMe": "Remember me",
-    "forgotPassword": "Forgot password?",
-    "signIn": "Sign in",
-    "noAccount": "Don't have an account?",
-    "signUp": "Sign up"
-  },
+
   "register": {
     "title": "Register",
     "name": "Name",
@@ -17,13 +8,22 @@
     "confirmPassword": "Confirm password",
     "signUp": "Sign up",
     "alreadyHaveAccount": "Already have an account?",
-    "signIn": "Sign in"
+    "signIn": "Sign in",
+    "firstname": "Firstname",
+    "name": "Lastname",
+    "pseudo": "Pseudo",
+    "city": "City",
+    "road": "Road",
+    "zip": "Zip code",
+    "phone": "phone",
+    "create": "Create",
+    "cancel": "Cancel"
   },
   "purchases": {
-    "title": "My sales",
+    "title": "Purchases",
     "openAuctions": "Open auction",
-    "myBids": "My sales",
-    "myWinningBids": "My sales win"
+    "myBids": "My auction",
+    "myWinningBids": "My auction win"
   },
   "sell": {
     "notStarted": "Not started sales",
@@ -41,6 +41,24 @@
     "it": "Computers",
     "furniture": "Furniture",
     "clothing": "Clothing",
-    "hobby": "Sports & Leisure"
+    "hobby": "Sports & Leisure",
+    "searchPlaceHolder": "Search a product..."
+  },
+  "login": {
+    "title": "Login",
+    "email": "Email address",
+    "password": "Password",
+    "rememberMe": "Remember me",
+    "forgotPassword": "Forgot password?",
+    "signIn": "Sign in",
+    "noAccount": "Don't have an account?",
+    "signUp": "Sign up",
+    "connexion":"Log in / Sign in"
+  },
+  "auction": {
+    "articleName": "Article name :",
+    "price": "Price :",
+    "endAuction": "End date :",
+    "seller": "Seller :"
   }
 }
