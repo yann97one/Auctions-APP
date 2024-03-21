@@ -1,38 +1,39 @@
-import {useTranslation} from "react-i18next";
 
+import {useTranslation} from "react-i18next";
+interface Props {
+  image: string;
+  title: string;
+  price: number;
+  endDate: Date;
+  seller: string;
+}
 function AuctionCard() {
+      const { title, price, endDate, seller, image } = props;
     const { t } = useTranslation();
     return (
-        <>
-        <a href="#" className="group relative block max-w-xs mx-3 my-3 overflow-hidden">
-            <img
-                src="https://images.unsplash.com/photo-1599481238640-4c1288750d7a?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2664&q=80"
-                alt=""
-                className="h-64 w-full object-cover transition duration-500 group-hover:scale-105 sm:h-72"
-            />
+       <>
+      <a
+        href="#"
+        className="group relative block max-w-xs mx-3 my-3 overflow-hidden"
+      >
+        <img
+          src={image}
+          alt=""
+          className="h-64 w-full object-cover transition duration-500 group-hover:scale-105 sm:h-72"
+        />
             <div className="relative border border-gray-100 bg-white p-6">
-    <span className="whitespace-nowrap bg-primary-600 text-white px-3 py-1.5 text-xs font-medium rounded">
-      {" "}
-        New{" "}
-    </span>
-                <h3 className="mt-4 text-lg font-medium text-gray-900">{t("auction.articleName")} Fauteuil</h3>
-                <p className="mt-1.5 text-sm text-gray-700">{t("auction.price")} $14.99</p>
-                <p className="mt-1.5 text-sm text-gray-700">{t("auction.endAuction")} 01/01/2000</p>
-                <br/>
-                <p className="mt-1.5 text-sm text-gray-700">{t("auction.seller")} {" "}
+                <h3 className="mt-4 text-lg font-medium text-gray-900">{t("auction.articleName")} {title}</h3>
+                <p className="mt-1.5 text-sm text-gray-700">{t("auction.price")} ${price}</p>
+                <p className="mt-1.5 text-sm text-gray-700">{t("auction.endAuction")} {endDate.toLocaleDateString()}</p>
+                 <br />
                     <a
-                        href="/bbb"
-                        className="font-medium text-primary-600 hover:underline dark:text-primary-500"
+                      href={`/seller/${seller}`}
+                      className="font-medium text-primary-600 hover:underline dark:text-primary-500"
                     >
-                        aaa
+                      {t("auction.seller")} {seller}
                     </a>
                 </p>
             </div>
         </a>
         </>
 
-
-);
-}
-
-export default AuctionCard;

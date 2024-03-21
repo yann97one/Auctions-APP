@@ -19,6 +19,32 @@
     "noUnusedLocals": true,
     "noUnusedParameters": true,
     "noFallthroughCasesInSwitch": true,
-    "baseUrl": "."
+    "baseUrl": ".",
+    "paths": {
+      "@/*": [
+        "src/*"
+      ],
+      "@components/*": [
+        "src/components/*"
+      ],
+      "@api": [
+        "src/api"
+      ],
+      "@api/*": [
+        "src/api/*"
+      ],
+      "@utils": [
+        "src/utils"
+      ],
+      "@tests-utils": [
+        "src/utils/tests-utils"
+      ],
+      "@services/*": [
+        "src/services/*"
+      ],
+      "@assets": [
+        "src/assets"
+      ]
+    }
   }
 }

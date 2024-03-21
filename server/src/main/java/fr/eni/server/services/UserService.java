@@ -14,6 +14,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 @RequiredArgsConstructor
@@ -38,27 +39,39 @@ public class UserService implements IUserService {
     }
 
     @Override
-    public Object getOne(long Id) {
+    public User getOne(long id) {
+        return userDao.getById(id);
+    }
+
+    @Override
+    public List getAll() {
         return null;
     }
 
-//    @Override
-//    public User findByLogin(String email, String password) {
-//        return;
-//    }
 
     @Override
     public UserDto register(SignUpDto userDto) {
-//        Optional<User> userOptional = Optional.ofNullable(userDao.findByLogin(userDto.email(), userDto.pseudo()));
-//
-//        if (userOptional.isPresent()) {
-//            throw new AppException("User already exist", HttpStatus.BAD_REQUEST);
-//        }
+        Optional<User> userOptional = Optional.ofNullable(userDao.findByLogin(userDto.email(), userDto.pseudo()));
+
+        if (userOptional.isPresent()) {
+            throw new AppException("User already exist", HttpStatus.BAD_REQUEST);
+        }
+
         User user = userMapper.signUpToUser(userDto);
         user.setPassword(passwordEncoder.encode(userDto.password()));
         user.setRole(Role.USER);
         userDao.create(user);
         return userMapper.toUserDto(user);
+    }
+
+    @Override
+    public User getByEmail(String email) {
+        return userDao.findByEmail(email);
+    }
+
+    @Override
+    public Optional<User> verifyIfUserExist(String email) {
+        return Optional.ofNullable(userDao.findByEmail(email));
     }
 
 
