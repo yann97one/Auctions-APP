@@ -6,6 +6,9 @@ import {useNavigate} from "react-router-dom";
 import {useUser} from "../../hooks/UserContext";
 import {apiClient} from "@api";
 import {saveTokenInStorage} from "@services/localStorage";
+import * as Yup from "yup";
+import {useForm} from "react-hook-form";
+import {yupResolver} from "@hookform/resolvers/yup";
 
 const INITIAL_STATE: LoginCredentials = {
     email: "",
@@ -15,6 +18,15 @@ const INITIAL_STATE: LoginCredentials = {
 
 function UserLogin() {
     const {setUser} = useUser();
+
+    const yupValidation = Yup.object().shape({
+        pseudo: Yup.string().required('Entrer une valeur').min(3, '3 caracteres minimum').max(30,'Limite de champs atteint'),
+        password: Yup.string().required('Entrer une valeur').min(3, '3 caracteres minimum').max(30,'Limite de champs atteint'),
+    });
+    const { register, formState: { errors } } = useForm({
+        mode: "onBlur",
+        resolver: yupResolver(yupValidation)
+    });
 
     const navigate = useNavigate();
     const [credentials, setCredentials] = useState(INITIAL_STATE);
@@ -41,37 +53,42 @@ function UserLogin() {
                         <div>
                             <label
                                 htmlFor="email"
-                                className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
-                            >
+                                className={`block mb-2 text-sm font-medium  dark:text-white ${ errors.pseudo ? "text-red-500" : "text-gray-900" }`}>
                                 Identifiant
                             </label>
                             <input
                                 type="email"
-                                name="email"
+                                {...register('pseudo')}
                                 onChange={(event) => setCredentials({...credentials, email: event.target.value})}
                                 id="email"
-                                className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                className={`shadow-sm bg-gray-50 border  text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5  ${errors.pseudo ? "text-red-500 border-red-500  " : "text-gray-900 border-gray-300" }`}
                                 placeholder="name@gmail.com"
-                                required
                             />
+                            {errors.pseudo &&
+                                <p className="text-red-500 text-sm mt-2">
+                                    {errors?.pseudo.message}
+                                </p>
+                            }
                         </div>
                         <div>
                             <label
                                 htmlFor="password"
-                                className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
-                            >
+                                className={`block mb-2 text-sm font-medium  dark:text-white ${ errors.password ? "text-red-500" : "text-gray-900" }`}>
                                 Mot de passe
                             </label>
                             <input
                                 type="password"
-                                name="password"
-                                id="password"
+                                {...register('password')}
                                 onChange={(event) => setCredentials({...credentials, password: event.target.value})}
                                 placeholder="••••••••"
-                                className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                                required
+                                className={`shadow-sm bg-gray-50 border  text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5  ${errors.password ? "text-red-500 border-red-500  " : "text-gray-900 border-gray-300" }`}
                             />
-                        </div>
+                            {errors.password &&
+                                <p className="text-red-500 text-sm mt-2">
+                                    {errors?.password.message}
+                                </p>
+                            }
+                                </div>
                         <div className="flex items-center justify-between">
                             <div className="flex items-start">
                                 <div className="flex items-center h-5">
