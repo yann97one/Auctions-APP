@@ -19,7 +19,7 @@ function App() {
                 },
                 {
                     href: `/create-auction`,
-                    itemLabel: "Créer une enchère",
+                    itemLabel: "Créer un article",
                 },
                 {
                     href: "/logout",

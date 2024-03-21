@@ -44,13 +44,10 @@ public class ArticleDaoImpl implements ArticleDao {
         namedParameters.addValue("userId", article.getUserId());
         namedParameters.addValue("idCategory", article.getIdCategory());
 
-        try {
-            Base64.getEncoder().encode(article.getImage());
-            byte[] imageBytes = Base64.getDecoder().decode(article.getImage());
-            namedParameters.addValue("image", imageBytes);
-        } catch (IllegalArgumentException e) {
-            namedParameters.addValue("image", null);
-        }
+
+        byte[] imageBytes = Base64.getDecoder().decode(article.getImage());
+        namedParameters.addValue("image", imageBytes);
+
         jdbcTemplate.update(INSERT, namedParameters);
     }
 

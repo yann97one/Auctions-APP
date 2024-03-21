@@ -1,8 +1,8 @@
 import Datepicker from "../shared/Datepicker";
 import {useNavigate} from "react-router-dom";
-import {ChangeEventHandler, MouseEventHandler, useEffect, useState} from "react";
-import {ArticleCreation, IAuctionCreation,} from "@/api/auctionsService/type";
+import {ChangeEventHandler, MouseEventHandler, useRef, useState} from "react";
 import {apiClient} from "@api";
+import {ArticleCreation} from "@api/articleService/types";
 
 interface ImageUploadProps {
     article: ArticleCreation;
@@ -12,6 +12,7 @@ interface ImageUploadProps {
 function ImageUpload(props: ImageUploadProps) {
     const [file, setFile] = useState<string | null>(null);
     const {article, setArticle} = props;
+    const imgRef = useRef<HTMLImageElement>(null);
     const onFileUploaded: ChangeEventHandler<HTMLInputElement> = (event) => {
         event.preventDefault();
         const selectedFile = event.target.files?.[0];
@@ -19,20 +20,18 @@ function ImageUpload(props: ImageUploadProps) {
             const reader = new FileReader();
             reader.onload = () => {
                 setFile(reader.result as string);
-                setArticle({...article, image: reader.result as string});
+                setArticle({...article, image: btoa(reader.result as string)});
                 console.log(article.image);
             };
             reader.readAsDataURL(selectedFile);
-            //setAuction({ ...auction, image: selectedFile });
         }
     };
 
     const border = file ? "border-solid" : "border-dashed";
     const clearFile = () => {
         setFile(null);
-        const fileInput = document.getElementById("upload") as HTMLInputElement;
-        if (fileInput) {
-            fileInput.value = ""; // Clear selected file from input
+        if (imgRef.current) {
+            imgRef.current.src = "";
         }
     };
 
@@ -43,6 +42,7 @@ function ImageUpload(props: ImageUploadProps) {
             {file ? (
                 <div onClick={clearFile}>
                     <img
+                        ref={imgRef}
                         src={file}
                         alt="Preview"
                         className="w-full h-48 object-cover mb-4 rounded-lg cursor-pointer"
@@ -105,14 +105,9 @@ const INITIAL_ARTICLE: ArticleCreation = {
     idCategory: "",
 };
 
-const INITIAL_AUCTION: IAuctionCreation = {
-    amount: 0,
-    article: INITIAL_ARTICLE
-};
 
 function AuctionCreation() {
     const navigate = useNavigate();
-    const [auction, setAuction] = useState<IAuctionCreation>(INITIAL_AUCTION);
 
     const [article, setArticle] = useState<ArticleCreation>(INITIAL_ARTICLE);
 
@@ -123,7 +118,8 @@ function AuctionCreation() {
 
 
         try {
-            const response = await apiClient.auctions.createAuction(auction);
+            setArticle({...article, beginDate: articleBeginDate, endDate: articleEndDate})
+            const response = await apiClient.articles.createArticle(article);
             console.log(response);
             navigate("/")
         } catch (error) {
@@ -131,19 +127,6 @@ function AuctionCreation() {
         }
 
     };
-
-    useEffect(() => {
-        setAuction({
-            ...auction,
-            date: articleBeginDate,
-            article: {
-                ...article,
-                beginDate: articleBeginDate,
-                endDate: articleEndDate,
-            },
-        });
-
-    }, [article]);
 
 
     return (
@@ -232,10 +215,7 @@ function AuctionCreation() {
                                 initialPrice: event.target.value as unknown as number,
                             })
 
-                            setAuction({
-                                ...auction,
-                                amount: event.target.value as unknown as number,
-                            })
+
                         }
                         }
                         className="shadow-sm max-w-sm my-2 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 dark:shadow-sm-light"

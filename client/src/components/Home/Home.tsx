@@ -1,16 +1,16 @@
 import {Filter, FilterLog} from "@components/shared";
-import {AuctionsList} from "@components/Auctions";
+import {ArticleList} from "@components/Auctions";
 import {useEffect, useState} from "react";
-import {Auction} from "@/api/auctionsService/type";
 import {apiClient} from "@/api";
+import {Article} from "@api/articleService/types";
 
 function Home() {
-    const [auctions, setAuctions] = useState<Auction[]>([]);
+    const [articles, setArticles] = useState<Article[]>([]);
 
     const getAuctions = async () => {
-        const response = await apiClient.auctions.getAuctionsList();
+        const response = await apiClient.articles.getArticles();
         console.log(response);
-        setAuctions(response);
+        setArticles(response);
     };
 
     useEffect(() => {
@@ -21,12 +21,12 @@ function Home() {
         <div className="flex flex-row">
             <div className="flex flex-col  w-1/3">
                 <div className="sticky top-12">
-                    <Filter auctions={auctions} setAuctions={setAuctions}/>
-                    <FilterLog auctions={auctions} setAuctions={setAuctions}/>
+                    <Filter articles={articles} setArticles={setArticles}/>
+                    <FilterLog articles={articles} setArticles={setArticles}/>
                 </div>
             </div>
             <div className="flex flex-col w-2/3">
-                <AuctionsList auctions={auctions}/>
+                <ArticleList articles={articles}/>
             </div>
         </div>
     );

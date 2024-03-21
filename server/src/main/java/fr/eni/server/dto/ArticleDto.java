@@ -1,29 +1,29 @@
-package fr.eni.server.bo;
+package fr.eni.server.dto;
 
+import fr.eni.server.bo.Article;
+import fr.eni.server.bo.Auction;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.time.LocalDate;
+import java.util.Date;
 
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
-public class Article {
-
-    private long id;
+public class ArticleDto {
     private String name;
     private String description;
     private LocalDate beginDate;
     private LocalDate endDate;
-    private String image;
     private int initialPrice;
-    private int sellPrice;
-    private long userId;
-    private int idCategory;
+    private String image;
 
-    public Article(String name, String description, LocalDate beginDate, LocalDate endDate, int initialPrice, int sellPrice, long userId, int idCategory, String image) {
-        this.name = name;
+    /*
+    *
+    *
+    *  this.name = name;
         this.description = description;
         this.beginDate = beginDate;
         this.endDate = endDate;
@@ -31,12 +31,15 @@ public class Article {
         this.sellPrice = sellPrice;
         this.userId = userId;
         this.idCategory = idCategory;
-        this.image = image;
-    }
-
-    public boolean isAuctionOver() {
-        return LocalDate.now().isAfter(this.endDate);
-    }
-
-
+    * */
+//    public static Article build(ArticleDto articleDto){
+//       return new Article(
+//                articleDto.g,
+//                articleDto.getContent(),
+//                articleDto.getAuthor(),
+//                articleDto.getCategory(),
+//                articleDto.getDate(),
+//                articleDto.getImage()
+//       )
+//    }
 }

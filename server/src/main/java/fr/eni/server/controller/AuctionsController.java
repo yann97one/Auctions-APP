@@ -3,6 +3,7 @@ package fr.eni.server.controller;
 import fr.eni.server.bo.Article;
 import fr.eni.server.bo.Auction;
 import fr.eni.server.bo.User;
+import fr.eni.server.dto.ArticleDto;
 import fr.eni.server.dto.AuctionDto;
 import fr.eni.server.security.services.UserDetailsImpl;
 import fr.eni.server.services.ArticleServiceImpl;
@@ -17,7 +18,9 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.security.core.Authentication;
 
 import java.net.URI;
+import java.sql.SQLOutput;
 import java.util.ArrayList;
+import java.util.Base64;
 import java.util.List;
 
 @CrossOrigin("*")
@@ -44,8 +47,8 @@ public class AuctionsController {
 
         for (Auction auction : auctions) {
             AuctionDto auctionDto = AuctionDto.build(auction);
-            Article auctionArticle = articleService.getOne(auction.getId());
-
+            Article auctionArticle = articleService.getOne(auction.getIdArticle());
+            auctionArticle.setImage(Base64.getEncoder().encodeToString(auctionArticle.getImage().getBytes()));
             auctionDto.setArticle(auctionArticle);
             auctionDto.setSellerPseudo(userService.getOne(auction.getIdUser()).getPseudo());
             auctionDto.setOver(auctionArticle.isAuctionOver());
@@ -73,15 +76,30 @@ public class AuctionsController {
 
     @PostMapping("/add")
     public ResponseEntity<AuctionDto> addAuction(@RequestBody AuctionDto auctionDto, Authentication auth) {
-        Article article = auctionDto.getArticle();
+        UserDetailsImpl userDetails = (UserDetailsImpl) auth.getPrincipal();
+
+
+        Article article = new Article(
+                auctionDto.getArticle().getName(),
+                auctionDto.getArticle().getDescription(),
+                auctionDto.getArticle().getBeginDate(),
+                auctionDto.getArticle().getEndDate(),
+                auctionDto.getArticle().getInitialPrice(),
+                auctionDto.getArticle().getSellPrice(),
+                userDetails.getId(),
+                auctionDto.getArticle().getIdCategory(),
+                auctionDto.getArticle().getImage()
+        );
+
+        System.out.println(article);
         articleService.createNew(article);
 
+        System.out.println("Article enregistré : " + article);
         Auction auction = new Auction();
         auction.setAmount(auctionDto.getAmount());
-        auction.setIdArticle(auctionDto.getArticle().getId());
+        // auction.setIdArticle(articleService.getOne(article.getId()));
         auction.setDate(auctionDto.getDate());
 
-        UserDetailsImpl userDetails = (UserDetailsImpl) auth.getPrincipal();
 
         auction.setIdUser(userDetails.getId());
         System.out.println(auth.getPrincipal());

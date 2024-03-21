@@ -1,6 +1,6 @@
 import Auction from "./Auction";
 import AuctionCreation from "./AuctionCreation";
-import AuctionsList from "./AuctionsList";
+import ArticleList from "./ArticleList";
 import Bid from "./Bid";
 
-export { Auction, AuctionCreation, AuctionsList, Bid };
+export {Auction, AuctionCreation, ArticleList, Bid};
