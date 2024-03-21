@@ -2,6 +2,7 @@ import Filter from "@components/shared/Filter";
 import FilterLog from "@components/shared/FilterLog";
 import AuctionsList from "@components/Auctions/AuctionsList";
 
+import '../../i18n.js' // ts => import './i18n.ts'
 function Home() {
 
     return (

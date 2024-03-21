@@ -1,11 +1,29 @@
 import {useState} from 'react';
 import logo from '../../assets/eni-logo.png';
 
+import i18n from 'i18next';
+import { initReactI18next } from 'react-i18next';
+import enJSON from '../../locale/en.json';
+import frJSON from '../../locale/fr.json';
+import {useTranslation} from "react-i18next";
+i18n.use(initReactI18next).init({
+    resources: {
+        en: { translation: enJSON },
+        fr: { translation: frJSON }
+    },
+    lng: 'en',
+    fallbackLng: 'en',
+    interpolation: { escapeValue: false }
+});
+
 interface Props {
     extraItems?: NavBarItem[];
 }
 
 function NavBar(props: Props) {
+    const { t } = useTranslation();
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+
     const {extraItems} = props;
 
     const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -16,15 +34,38 @@ function NavBar(props: Props) {
     };
 
 
+    const menuItems: NavBarItem[] = [
+        {
+            href: '/login',
+            itemLabel: 'Se connecter/S\'inscrire'
+        }
+    ]
+
+    useEffect(() => {
+        if (extraItems) {
+            menuItems.push(...extraItems);
+        }
+    }, [extraItems]);
+    const changeLanguage = (language) => {
+        i18n.changeLanguage(language);
+    };
+
     return (
+
         <nav className="bg-white border border-amber-100 dark:bg-gray-900 mb-16">
+
             <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
+
                 <a href="/" className="text-lg font-semibold text-gray-900 dark:text-white">
                     <img src={logo} alt="ENI" className="w-100 h-100"/>
                 </a>
+                <div >
+                    <button type="submit" onClick={() => changeLanguage('fr')}>Français /&nbsp;</button>
+                    <button type="submit" onClick={() => changeLanguage('en')}>English</button>
+                </div>
 
                 <button onClick={toggleMenu} type="button"
-                        className="inline-flex items-center p-2 w-10 h-10 justify-center text-sm text-gray-500 rounded-lg md:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600"
+                        className="inline-flex items.center p-2 w-10 h-10 justify-center text-sm text-gray-500 rounded-lg md:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600"
                         aria-controls="navbar-default" aria-expanded={isMenuOpen}>
                     <span className="sr-only">Open main menu</span>
                     <svg className="w-5 h-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
@@ -38,7 +79,7 @@ function NavBar(props: Props) {
                         {extraItems!.map((item, index) => (
                             <li key={index}>
                                 <a href={item.href}
-                                   className="'block py-2 px-3 text-white bg-blue-700 rounded md:bg-transparent md:text-blue-700 md:p-0 dark:text-white md:dark:text-blue-500'">{item.itemLabel}</a>
+                                   className="'block py-2 px-3 text-white bg-blue-700 rounded md:bg-transparent md:text-blue-700 md:p-0 dark:text-white md:dark:text-blue-500'">{t("login.connexion")}</a>
                             </li>
                         ))}
 
