@@ -9,6 +9,8 @@ public interface Dao<T> {
 
     List<T> getAll();
 
+    void update(T obj);
+
     T getById(long userId);
 
 

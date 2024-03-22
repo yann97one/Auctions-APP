@@ -13,7 +13,7 @@ public class WithdrawalRowMapper implements RowMapper<Withdrawal> {
         withdrawal.setRoad(rs.getString("road"));
         withdrawal.setZip(rs.getString("zip"));
         withdrawal.setCity(rs.getString("city"));
-        withdrawal.setId(rs.getInt("id_article"));
+        withdrawal.setIdArticle(rs.getInt("id_article"));
         return withdrawal;
     }
 }

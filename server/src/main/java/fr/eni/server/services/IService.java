@@ -9,6 +9,7 @@ public interface IService<T> {
 
     T getOne(long Id);
 
+    void update(T obj);
     List<T> getAll();
 
 }

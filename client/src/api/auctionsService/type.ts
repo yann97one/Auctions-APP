@@ -1,22 +1,18 @@
+import {Article, ArticleCreation} from "@api/articleService/types";
+
 interface Auction {
-  id: number;
-  title: string;
-  amount: number;
-  sellerEmail: string;
-  article: Article;
+    id: string;
+    amount: number;
+    date: Date;
+    sellerPseudo: string;
+    article: Article;
 }
 
-interface Article {
-  id: number;
-  name: string;
-  description: string;
-  beginDate: Date;
-  endDate: Date;
-  image: string | null;
-  initialPrice: number;
-  sellPrice: number;
-  userId: number;
-  idCategory: number;
+interface IAuctionCreation {
+    date: Date;
+    amount: number;
+    article: ArticleCreation;
 }
 
-export type { Auction, Article };
+
+export type {Auction, IAuctionCreation,};
