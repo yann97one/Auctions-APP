@@ -31,7 +31,14 @@ public class AuctionServiceImpl implements IAuctionService {
     }
 
     @Override
+    public void update(Auction auction) {
+        auctionDAO.update(auction);
+    }
+
+    @Override
     public List<Auction> getAll() {
         return auctionDAO.getAll();
     }
+
+
 }

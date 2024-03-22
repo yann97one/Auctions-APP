@@ -14,16 +14,19 @@ import java.time.LocalDate;
 public class AuctionDto {
     private long id;
     private int amount;
-    private Article article;
     private LocalDate date;
-    private String sellerEmail;
+    private String sellerPseudo;
+    private boolean isOver;
+    private ArticleDto article;
 
-    public AuctionDto(long id,int amount,  LocalDate date) {
+
+    public AuctionDto(long id, int amount, LocalDate date) {
         this.id = id;
         this.amount = amount;
         this.date = date;
     }
-    public AuctionDto(Article article,int amount,  LocalDate date) {
+
+    public AuctionDto(ArticleDto article, int amount, LocalDate date) {
         this.article = article;
         this.amount = amount;
         this.date = date;
