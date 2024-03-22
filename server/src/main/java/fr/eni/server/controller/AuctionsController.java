@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.security.core.Authentication;
 
 import java.net.URI;
+import java.nio.charset.StandardCharsets;
 import java.sql.SQLOutput;
 import java.util.ArrayList;
 import java.util.Base64;
@@ -47,11 +48,9 @@ public class AuctionsController {
 
         for (Auction auction : auctions) {
             AuctionDto auctionDto = AuctionDto.build(auction);
-            Article auctionArticle = articleService.getOne(auction.getIdArticle());
-            auctionArticle.setImage(Base64.getEncoder().encodeToString(auctionArticle.getImage().getBytes()));
+            ArticleDto auctionArticle = ArticleDto.build(articleService.getOne(auction.getIdArticle()));
             auctionDto.setArticle(auctionArticle);
             auctionDto.setSellerPseudo(userService.getOne(auction.getIdUser()).getPseudo());
-            auctionDto.setOver(auctionArticle.isAuctionOver());
 
             auctionsToReturn.add(auctionDto);
         }
@@ -63,9 +62,8 @@ public class AuctionsController {
     public ResponseEntity<AuctionDto> getSingleAuction(@PathVariable(value = "id") long id) {
         try {
             AuctionDto auction = AuctionDto.build(auctionService.getOne(id));
-            Article article = articleService.getOne(auction.getId());
+            ArticleDto article = ArticleDto.build(articleService.getOne(auction.getId()));
             auction.setArticle(article);
-            auction.setOver(article.isAuctionOver());
             return ResponseEntity.ok(auction);
 
         } catch (EmptyResultDataAccessException e) {
@@ -85,10 +83,10 @@ public class AuctionsController {
                 auctionDto.getArticle().getBeginDate(),
                 auctionDto.getArticle().getEndDate(),
                 auctionDto.getArticle().getInitialPrice(),
-                auctionDto.getArticle().getSellPrice(),
+                auctionDto.getArticle().getInitialPrice(),
                 userDetails.getId(),
-                auctionDto.getArticle().getIdCategory(),
-                auctionDto.getArticle().getImage()
+                auctionDto.getArticle().getInitialPrice(),
+                auctionDto.getArticle().getImage().getBytes(StandardCharsets.UTF_8)
         );
 
         System.out.println(article);

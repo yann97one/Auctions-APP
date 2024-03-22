@@ -1,8 +1,12 @@
 package fr.eni.server.controller;
 
 import fr.eni.server.bo.Article;
+import fr.eni.server.dto.ArticleDetailDto;
 import fr.eni.server.security.services.UserDetailsImpl;
 import fr.eni.server.services.ArticleServiceImpl;
+import fr.eni.server.services.CategoryServiceImpl;
+import fr.eni.server.services.UserService;
+import fr.eni.server.services.WithDrawalService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.http.ResponseEntity;
@@ -20,6 +24,15 @@ public class ArticleController {
     @Autowired
     private ArticleServiceImpl articleService;
 
+    @Autowired
+    private CategoryServiceImpl categoryService;
+
+    @Autowired
+    private UserService userService;
+
+    @Autowired
+    private WithDrawalService withdrawalService;
+
     @GetMapping("/all")
     public ResponseEntity<List<Article>> getAllArticles() {
         List<Article> articles = articleService.getAll();
@@ -36,14 +49,21 @@ public class ArticleController {
         return ResponseEntity.created(URI.create("api/articles/")).body(article);
     }
 
-    @GetMapping("{id}")
-    public ResponseEntity<Article> getOneArticle(@PathVariable(value = "id") long id) {
-        try {
-
+    @GetMapping("/{id}")
+    public ResponseEntity<ArticleDetailDto> getOneArticle(@PathVariable(value = "id") long id) {
+//        try {
+            System.out.println("id" + id);
             Article article = articleService.getOne(id);
-            return ResponseEntity.ok(article);
-        } catch (EmptyResultDataAccessException e) {
-            return ResponseEntity.notFound().build();
-        }
+            System.out.println("Found article" + article);
+            ArticleDetailDto articleDetailDto = ArticleDetailDto.build(article);
+            articleDetailDto.setCategory(categoryService.getOne(article.getIdCategory()).getLibelle());
+            articleDetailDto.setSellerName(userService.getOne(article.getUserId()).getFirstName());
+            articleDetailDto.setWithdrawal(withdrawalService.getOne(article.getId()));
+
+            return ResponseEntity.ok(articleDetailDto);
+//        } catch (EmptyResultDataAccessException e) {
+//            System.out.println("Article not found" + e);
+//            return ResponseEntity.notFound().build();
+//        }
     }
 }

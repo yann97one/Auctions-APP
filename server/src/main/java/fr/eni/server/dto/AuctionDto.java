@@ -17,7 +17,7 @@ public class AuctionDto {
     private LocalDate date;
     private String sellerPseudo;
     private boolean isOver;
-    private Article article;
+    private ArticleDto article;
 
 
     public AuctionDto(long id, int amount, LocalDate date) {
@@ -26,7 +26,7 @@ public class AuctionDto {
         this.date = date;
     }
 
-    public AuctionDto(Article article, int amount, LocalDate date) {
+    public AuctionDto(ArticleDto article, int amount, LocalDate date) {
         this.article = article;
         this.amount = amount;
         this.date = date;

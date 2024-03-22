@@ -13,7 +13,7 @@ import java.util.List;
 public class CategoryDaoImpl implements CategoryDao {
     private static final String SELECT_ALL_CATEGORIES = "SELECT * FROM CATEGORIES";
 
-    private static final String SELECT_CATEGORY_BY_ID = "SELECT * FROM CATEGORIES WHERE id = :id";
+    private static final String SELECT_CATEGORY_BY_ID = "SELECT * FROM CATEGORIES WHERE id_category = :id";
 
     private static final String DELETE_CATEGORY = "DELETE FROM CATEGORIES WHERE id = :id";
 

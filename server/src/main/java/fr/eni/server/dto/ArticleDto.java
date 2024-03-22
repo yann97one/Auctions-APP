@@ -7,6 +7,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.time.LocalDate;
+import java.util.Base64;
 import java.util.Date;
 
 @AllArgsConstructor
@@ -20,26 +21,14 @@ public class ArticleDto {
     private int initialPrice;
     private String image;
 
-    /*
-    *
-    *
-    *  this.name = name;
-        this.description = description;
-        this.beginDate = beginDate;
-        this.endDate = endDate;
-        this.initialPrice = initialPrice;
-        this.sellPrice = sellPrice;
-        this.userId = userId;
-        this.idCategory = idCategory;
-    * */
-//    public static Article build(ArticleDto articleDto){
-//       return new Article(
-//                articleDto.g,
-//                articleDto.getContent(),
-//                articleDto.getAuthor(),
-//                articleDto.getCategory(),
-//                articleDto.getDate(),
-//                articleDto.getImage()
-//       )
-//    }
+    public static ArticleDto build(Article article){
+        ArticleDto articleDto = new ArticleDto();
+        articleDto.name = article.getName();
+        articleDto.description = article.getDescription();
+        articleDto.beginDate = article.getBeginDate();
+        articleDto.endDate = article.getEndDate();
+        articleDto.initialPrice = article.getInitialPrice();
+        articleDto.image = Base64.getEncoder().encodeToString(article.getImage());
+        return articleDto;
+    }
 }
