@@ -10,14 +10,10 @@ import java.io.Serializable;
 @NoArgsConstructor
 @Data
 public class Withdrawal implements Serializable {
-    private int id;
+    private long idArticle;
     private String road;
     private String zip;
     private String city;
 
-    public Withdrawal( String road, String city,String zip) {
-        this.road = road;
-        this.city = city;
-        this.zip=zip;
-    }
+
 }

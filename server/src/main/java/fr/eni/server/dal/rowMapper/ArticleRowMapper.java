@@ -19,7 +19,7 @@ public class ArticleRowMapper implements RowMapper<Article> {
         article.setSellPrice(rs.getInt("sell_price"));
         article.setUserId(rs.getInt("user_id"));
         article.setIdCategory(rs.getInt("id_category"));
-        article.setImage(rs.getString("image"));
+        article.setImage(rs.getBytes("image"));
         return article;
     }
 }

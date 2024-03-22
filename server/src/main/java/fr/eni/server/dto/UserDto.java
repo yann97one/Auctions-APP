@@ -25,6 +25,7 @@ public class UserDto {
         dto.setEmail(user.getEmail());
         dto.setPseudo(user.getPseudo());
         dto.setFirstName(user.getFirstName());
+        dto.setCredits(user.getCredit());
         dto.setRole(user.getRole());
         return dto;
     }
