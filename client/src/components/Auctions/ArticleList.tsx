@@ -19,7 +19,7 @@ function ArticleList(props: Props) {
                         key={article.id}
                         articleId={article.id}
                         image={
-                            article.image ? article.image : DEFAULT_IMAGE_LINK
+                            DEFAULT_IMAGE_LINK
                         }
                         title={article.name}
                         price={article.initialPrice}
