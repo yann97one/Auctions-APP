@@ -25,7 +25,7 @@ public class WithdrawalDaoImpl implements WithdrawalDao{
     @Override
     public void create(Withdrawal withdrawal) {
         MapSqlParameterSource namedParameters = new MapSqlParameterSource();
-        namedParameters.addValue("id",withdrawal.getId());
+        namedParameters.addValue("id_article",withdrawal.getIdArticle());
         namedParameters.addValue("city",withdrawal.getCity());
         namedParameters.addValue("road",withdrawal.getRoad());
         namedParameters.addValue("zip",withdrawal.getZip() );
@@ -42,6 +42,11 @@ public class WithdrawalDaoImpl implements WithdrawalDao{
     @Override
     public List<Withdrawal> getAll() {
         return jdbcTemplate.query(FIND_ALL, new WithdrawalRowMapper());
+    }
+
+    @Override
+    public void update(Withdrawal obj) {
+        
     }
 
     @Override

@@ -5,6 +5,7 @@ import fr.eni.server.dal.ArticleDao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Base64;
 import java.util.List;
 
 @Service
@@ -25,7 +26,15 @@ public class ArticleServiceImpl implements IArticleService{
 
     @Override
     public Article getOne(long Id) {
-        return articleDao.getById(Id);
+        Article article = articleDao.getById(Id);
+        byte[] imageBytes = Base64.getEncoder().encode(article.getImage());
+        article.setImage(imageBytes);
+        return article;
+    }
+
+    @Override
+    public void update(Article article) {
+        articleDao.update(article);
     }
 
     @Override

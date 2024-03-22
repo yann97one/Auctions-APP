@@ -51,6 +51,7 @@ public class AuthController {
 
     @PostMapping("/login")
     public ResponseEntity<UserDto> login(@RequestBody CredentialsDTO credentialsDto) {
+        System.out.println(credentialsDto);
         Authentication authentication = authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(credentialsDto.getEmail(), credentialsDto.getPassword())
         );
@@ -70,16 +71,15 @@ public class AuthController {
 
     @PostMapping("/register")
     public ResponseEntity<UserDto> register(@RequestBody SignUpDto signupDto) throws AppException {
-//      if(userService.verifyIfUserExist(signupDto.email()).isPresent()){
-//          throw new AppException("Email already in use",HttpStatus.BAD_REQUEST);
-//      }
+
         System.out.println(signupDto);
         try {
 
             userService.register(signupDto);
             return ResponseEntity.ok(UserDto.build(signupDto));
         } catch (AppException e) {
-            return ResponseEntity.badRequest().build();
+
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
         }
     }
 

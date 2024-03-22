@@ -1,0 +1,5 @@
+name: "server"
+appmap_dir: "tmp/appmap"
+packages:
+- path: "fr.eni.server"
+- path: "sql"
