@@ -1,0 +1,7 @@
+[
+  {
+    "route": "GET /api/articles/all",
+    "parameters": "()",
+    "status": 200
+  }
+]

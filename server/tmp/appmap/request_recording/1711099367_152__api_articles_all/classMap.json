@@ -1,0 +1,188 @@
+[
+  {
+    "children": [
+      {
+        "children": [
+          {
+            "children": [
+              {
+                "children": [
+                  {
+                    "children": [
+                      {
+                        "name": "findByEmail",
+                        "type": "function",
+                        "static": false,
+                        "location": "src/main/java/fr/eni/server/dal/UserDaoImpl.java:99"
+                      }
+                    ],
+                    "name": "UserDaoImpl",
+                    "type": "class"
+                  },
+                  {
+                    "children": [
+                      {
+                        "children": [
+                          {
+                            "name": "mapRow",
+                            "type": "function",
+                            "static": false,
+                            "location": "src/main/java/fr/eni/server/dal/rowMapper/ArticleRowMapper.java:12"
+                          }
+                        ],
+                        "name": "ArticleRowMapper",
+                        "type": "class"
+                      },
+                      {
+                        "children": [
+                          {
+                            "name": "mapRow",
+                            "type": "function",
+                            "static": false,
+                            "location": "src/main/java/fr/eni/server/dal/rowMapper/UserRowMapper.java:13"
+                          }
+                        ],
+                        "name": "UserRowMapper",
+                        "type": "class"
+                      }
+                    ],
+                    "name": "rowMapper",
+                    "type": "package"
+                  }
+                ],
+                "name": "dal",
+                "type": "package"
+              },
+              {
+                "children": [
+                  {
+                    "children": [
+                      {
+                        "children": [
+                          {
+                            "name": "validateJwtToken",
+                            "type": "function",
+                            "static": false,
+                            "location": "src/main/java/fr/eni/server/security/jwt/JwtUtils.java:56"
+                          },
+                          {
+                            "name": "getJwtFromCookies",
+                            "type": "function",
+                            "static": false,
+                            "location": "src/main/java/fr/eni/server/security/jwt/JwtUtils.java:32"
+                          },
+                          {
+                            "name": "getEmailFromJwtToken",
+                            "type": "function",
+                            "static": false,
+                            "location": "src/main/java/fr/eni/server/security/jwt/JwtUtils.java:51"
+                          }
+                        ],
+                        "name": "JwtUtils",
+                        "type": "class"
+                      },
+                      {
+                        "children": [
+                          {
+                            "name": "doFilterInternal",
+                            "type": "function",
+                            "static": false,
+                            "location": "src/main/java/fr/eni/server/security/jwt/JwtAuthFilter.java:37"
+                          }
+                        ],
+                        "name": "JwtAuthFilter",
+                        "type": "class"
+                      }
+                    ],
+                    "name": "jwt",
+                    "type": "package"
+                  },
+                  {
+                    "children": [
+                      {
+                        "children": [
+                          {
+                            "name": "build",
+                            "type": "function",
+                            "static": true,
+                            "location": "src/main/java/fr/eni/server/security/services/UserDetailsImpl.java:34"
+                          }
+                        ],
+                        "name": "UserDetailsImpl",
+                        "type": "class"
+                      },
+                      {
+                        "children": [
+                          {
+                            "name": "loadUserByUsername",
+                            "type": "function",
+                            "static": false,
+                            "location": "src/main/java/fr/eni/server/security/services/UserDetailsServiceImpl.java:19"
+                          }
+                        ],
+                        "name": "UserDetailsServiceImpl",
+                        "type": "class"
+                      }
+                    ],
+                    "name": "services",
+                    "type": "package"
+                  }
+                ],
+                "name": "security",
+                "type": "package"
+              },
+              {
+                "children": [
+                  {
+                    "children": [
+                      {
+                        "name": "valueOf",
+                        "type": "function",
+                        "static": true,
+                        "location": "src/main/java/fr/eni/server/bo/Role.java:3"
+                      }
+                    ],
+                    "name": "Role",
+                    "type": "class"
+                  }
+                ],
+                "name": "bo",
+                "type": "package"
+              }
+            ],
+            "name": "server",
+            "type": "package"
+          }
+        ],
+        "name": "eni",
+        "type": "package"
+      }
+    ],
+    "name": "fr",
+    "type": "package"
+  },
+  {
+    "type": "database",
+    "name": "Database",
+    "children": [
+      {
+        "type": "query",
+        "name": "SELECT * FROM Users where email=?"
+      },
+      {
+        "type": "query",
+        "name": "SELECT * FROM Selled_Articles "
+      }
+    ]
+  },
+  {
+    "type": "http",
+    "name": "HTTP server requests",
+    "children": [
+      {
+        "type": "route",
+        "name": "GET /api/articles/all"
+      }
+    ]
+  }
+]

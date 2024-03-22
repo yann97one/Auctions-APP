@@ -1,0 +1,14 @@
+[
+  {
+    "caller": "GET /api/articles/all",
+    "callee": "SELECT * FROM Selled_Articles "
+  },
+  {
+    "caller": "GET /api/articles/all",
+    "callee": "fr/eni"
+  },
+  {
+    "caller": "fr/eni",
+    "callee": "GET /api/articles/all"
+  }
+]
